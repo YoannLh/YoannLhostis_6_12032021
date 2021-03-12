@@ -1,0 +1,23 @@
+{
+  "name": "projet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "sass": "^1.32.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YoannLh/YoannLhostis_6_12032021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YoannLh/YoannLhostis_6_12032021/issues"
+  },
+  "homepage": "https://github.com/YoannLh/YoannLhostis_6_12032021#readme"
+}
