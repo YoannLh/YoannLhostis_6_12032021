@@ -5,6 +5,9 @@ body {
 .flex {
 	display: flex;
 }
+
+$primary: rgba(144,28,28,1);
+
 header {
 	position: relative;
 	padding: 40px 25px;
@@ -18,19 +21,71 @@ header {
 	.nav {
 		position: absolute;
 		top: 100px;
-		width: 80%;
+		left: 0;
+		width: 100%;
+		flex-direction: column;
 		@media screen and (min-width: 1280px) {
 			top: 40px;	
 			margin: auto;
 		}
-		.nav__li {
-			height: 17px;
-			margin-right: 15px;
+		.nav__ul {
+			padding: 0;
+			margin: auto;
+			justify-content: space-around;
+		}
+		.nav__ul__li {
+			height: 13px;
 			padding: 5px;
-			border: 1px solid red;
-			border-radius: 40%;
+			margin: 2%;
+			font-size: 0.8em;
+			border: 1px solid grey;
+			border-radius: 25px;
 			list-style-type: none;
+			color: $primary;
 		}
 	}
 }
+main {
+	position: relative;
+	top: 100px;
+	.main__photographer {
+		margin: auto;
+		width: 60%;
+		height: 350px;
+		.main__photographer__photo {
+			height: 200px;
+			background: black;
+		}
+		.main__photographer__description {
+			height: 75px;
+			background: red;
+		}
+		.main__photographer__tags {
+			height: 75px;
+			background: blue;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
