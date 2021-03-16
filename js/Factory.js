@@ -9,7 +9,7 @@ class PhotographerFactory {
 		this.portrait = portrait;
 		this.price = price;
 		this.tagline = tagline;
-		this.tags = tags;
+		this.tags = tags; 
 	}
 	askJsonAndCreatePhotographers() {
 		for(const photographer of data.photographers) {

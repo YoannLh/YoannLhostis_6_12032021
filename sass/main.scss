@@ -5,8 +5,12 @@ body {
 .flex {
 	display: flex;
 }
+p {
+	margin: 5px;
+}
 
 $primary: rgba(144,28,28,1);
+$secondary: rgba(211,87,60,1);
 
 header {
 	position: relative;
@@ -48,6 +52,7 @@ header {
 			padding: 5px;
 			margin: 2%;
 			font-size: 0.8em;
+			font-weight: bold;
 			border: 1px solid rgb(212,212,212);
 			border-radius: 25px;
 			list-style-type: none;
@@ -69,22 +74,49 @@ main {
 	}
 	.main__photographer {
 		margin: 1% auto;
-		width: 60%;
+		
 		height: 350px;
 		@media screen and (min-width: 1024px) {
 			max-width: 240px;
 		}
 		.main__photographer__photo {
 			height: 200px;
-			background: black;
+			img {
+				margin: auto;
+				height: 100%;
+			}
 		}
 		.main__photographer__description {
 			height: 75px;
-			background: red;
+			text-align: center;
+			.main__photographer__description__name {
+				font-size: 2.3em;
+				color: $secondary;
+			}
+			.main__photographer__description__city {
+				color: $primary;
+			}
+			.main__photographer__description__tagline {
+				
+			}
+			.main__photographer__description__price {
+				color: grey;
+			}
+			.main__photographer__tags {
+				height: 13px;
+				padding: 5px;
+				margin: 2%;
+				font-size: 0.8em;
+				font-weight: bold;
+				border: 1px solid rgb(212,212,212);
+				border-radius: 25px;
+				list-style-type: none;
+				color: $primary;
+			}
+
 		}
 		.main__photographer__tags {
 			height: 75px;
-			background: blue;
 		}
 	}
 }
