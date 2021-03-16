@@ -1,6 +1,4 @@
 
-console.log(artists);
-
 function displayPhotographers() { 
 	return document.getElementById("main").innerHTML =
 		artists.map(artist => {
@@ -21,6 +19,6 @@ function displayPhotographers() {
 		});
 }
 
-displayPhotographers();
+setTimeout(() => displayPhotographers(), 100);
 
 

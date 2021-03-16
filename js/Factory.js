@@ -18,7 +18,6 @@ class PhotographerFactory {
   		request.onreadystatechange = function() {
   			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                 this.data = JSON.parse(this.response);
-                console.log("data : " + this.data);
 				for(const photographer of this.data.photographers) {
 					// ou ? let id = 0;
 					let city = photographer.city;
@@ -35,10 +34,11 @@ class PhotographerFactory {
 				}
 			}
 		}
-		request.open("GET", "https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/Front-End+V2/P5+Javascript+%26+Accessibility/FishEyeDataFR.json");
+		request.open("GET", "./data/data.json");
         request.send();
 	}
 };
 
 const photographersFactory = new PhotographerFactory();
 photographersFactory.askJsonAndCreatePhotographers();
+
