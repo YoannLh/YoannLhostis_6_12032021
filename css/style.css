@@ -11,6 +11,10 @@ body {
   font-family: "DM Sans", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 p {
   margin: 5px;
 }
@@ -109,6 +113,9 @@ main .main__photographer .main__photographer__description .main__photographer__d
 main .main__photographer .main__photographer__description .main__photographer__description__city {
   color: #901c1c;
 }
+main .main__photographer .main__photographer__description .main__photographer__description__tagline {
+  color: black;
+}
 main .main__photographer .main__photographer__description .main__photographer__description__price {
   color: grey;
 }
@@ -122,9 +129,6 @@ main .main__photographer .main__photographer__description .main__photographer__t
   border-radius: 25px;
   list-style-type: none;
   color: #901c1c;
-}
-main .main__photographer .main__photographer__tags {
-  height: 75px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -8,6 +8,9 @@ body {
 * {
 	font-family: 'DM Sans', sans-serif;
 }
+a {
+	text-decoration: none;
+}
 p {
 	margin: 5px;
 }
@@ -77,7 +80,6 @@ main {
 	}
 	.main__photographer {
 		margin: 1% auto;
-		
 		height: 350px;
 		@media screen and (min-width: 1024px) {
 			max-width: 240px;
@@ -100,7 +102,7 @@ main {
 				color: $primary;
 			}
 			.main__photographer__description__tagline {
-				
+				color: black;
 			}
 			.main__photographer__description__price {
 				color: grey;
@@ -116,10 +118,6 @@ main {
 				list-style-type: none;
 				color: $primary;
 			}
-
-		}
-		.main__photographer__tags {
-			height: 75px;
 		}
 	}
 }
