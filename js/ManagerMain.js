@@ -1,5 +1,5 @@
 
-class Main {
+class ManagerMain {
 	constructor() {
 		this.main = document.getElementById("main");
 		this.data = artists;
@@ -14,7 +14,8 @@ class Main {
 		this.tags = ["portait", "art", "fashion", "architecture", "travel", "sport", "animals", "events"];
 		this.taggedArtists = [];
 	}
-	displayPhotographersInMainPage() { 
+	displayPhotographersInMainPage() {
+		console.log("data : " + this.data);
 		return this.main.innerHTML =
 			this.data.map(artist => {
 				return (
@@ -167,9 +168,9 @@ class Main {
 	}
 }
 
-const main = new Main();
-setTimeout(() => main.displayPhotographersInMainPage(), 100);
-setTimeout(() => main.listenTags(), 500);
+const managerMain = new ManagerMain();
+setTimeout(() => managerMain.displayPhotographersInMainPage(), 100);
+setTimeout(() => managerMain.listenTags(), 500);
 
 
 

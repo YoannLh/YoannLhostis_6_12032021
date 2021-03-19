@@ -71,14 +71,14 @@ header .nav .nav__ul__li {
   color: #901c1c;
 }
 
-main {
+#main {
   position: relative;
   top: 80px;
   flex-direction: column;
   justify-content: space-between;
 }
 @media screen and (min-width: 1024px) {
-  main {
+  #main {
     top: 0;
     width: 60%;
     flex-direction: row;
@@ -86,40 +86,102 @@ main {
     margin: auto;
   }
 }
-main .main__photographer {
+#main .main__photographer {
   margin: 1% auto;
   height: 350px;
 }
 @media screen and (min-width: 1024px) {
-  main .main__photographer {
+  #main .main__photographer {
     max-width: 240px;
   }
 }
-main .main__photographer .main__photographer__photo {
+#main .main__photographer .main__photographer__photo {
   height: 200px;
 }
-main .main__photographer .main__photographer__photo img {
+#main .main__photographer .main__photographer__photo img {
   margin: auto;
-  height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+  height: 200px;
+  width: 200px;
 }
-main .main__photographer .main__photographer__description {
+#main .main__photographer .main__photographer__description {
   height: 75px;
   text-align: center;
 }
-main .main__photographer .main__photographer__description .main__photographer__description__name {
+#main .main__photographer .main__photographer__description .main__photographer__description__name {
   font-size: 2.3em;
   color: #d3573c;
 }
-main .main__photographer .main__photographer__description .main__photographer__description__city {
+#main .main__photographer .main__photographer__description .main__photographer__description__city {
   color: #901c1c;
 }
-main .main__photographer .main__photographer__description .main__photographer__description__tagline {
+#main .main__photographer .main__photographer__description .main__photographer__description__tagline {
   color: black;
 }
-main .main__photographer .main__photographer__description .main__photographer__description__price {
+#main .main__photographer .main__photographer__description .main__photographer__description__price {
   color: grey;
 }
-main .main__photographer .main__photographer__description .main__photographer__tags {
+#main .main__photographer .main__photographer__description .main__photographer__tags {
+  height: 13px;
+  padding: 5px;
+  margin: 2%;
+  font-size: 0.8em;
+  font-weight: bold;
+  border: 1px solid #d4d4d4;
+  border-radius: 25px;
+  list-style-type: none;
+  color: #901c1c;
+}
+
+#mainInPage {
+  position: relative;
+  padding: 0 20px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media screen and (min-width: 1024px) {
+  #mainInPage {
+    top: 0;
+    width: 60%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: auto;
+  }
+}
+#mainInPage .mainInPage__photographer {
+  height: 125px;
+}
+@media screen and (min-width: 1024px) {
+  #mainInPage .mainInPage__photographer {
+    max-width: 240px;
+  }
+}
+#mainInPage .mainInPage__photographer .mainInPage__photographer__photo {
+  position: absolute;
+  right: 20px;
+  top: -10px;
+  height: 100px;
+}
+#mainInPage .mainInPage__photographer .mainInPage__photographer__photo img {
+  object-fit: cover;
+  border-radius: 100%;
+  height: 100px;
+  width: 100px;
+}
+#mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__description__name {
+  width: 70%;
+  font-size: 2em;
+  color: #d3573c;
+}
+#mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__description__city {
+  color: #901c1c;
+}
+#mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__description__tagline {
+  color: black;
+  width: 70%;
+}
+#mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__tags {
   height: 13px;
   padding: 5px;
   margin: 2%;
