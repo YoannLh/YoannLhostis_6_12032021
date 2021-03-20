@@ -34,7 +34,7 @@ class PhotographerFactory {
 				}
 			}
 		}
-		request.open("GET", "./data/data.json");
+		request.open("GET", "../data/data.json");
         request.send();
 	}
 };

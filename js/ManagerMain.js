@@ -1,3 +1,6 @@
+//sessionStorage.setItem("nameStationResa", response.name);
+
+//sessionStorage.getItem("nameStation");
 
 class ManagerMain {
 	constructor() {
@@ -18,9 +21,10 @@ class ManagerMain {
 		console.log("data : " + this.data);
 		return this.main.innerHTML =
 			this.data.map(artist => {
+				sessionStorage.setItem("photographer" + artist.id + "", JSON.stringify(artist));
 				return (
-					'<a href="./pages/' + artist.name + '.html">' +
-						'<section class="main__photographer">' + 
+					'<a href="./pages/photographer.html?id=' + artist.id + '">' +
+						'<section class="main__photographer">' +
 							'<div class="main__photographer__photo flex">' + 
 								'<img src="./images/photos/' + artist.name + '/' + artist.portrait + '" />' + 
 							'</div>' + 
@@ -37,19 +41,6 @@ class ManagerMain {
 			});
 	}
 	listenTags() {
-		// for(const tag of this.tags) {
-		// 	this.tag.addEventListener("click", () => {
-		// 		console.Log("tag");
-		// 		//this.$`{tag}`.style.borderColor = "rgba(200,0,28,1)";
-		// 		for(const artist of this.data) {
-		// 			for(const tag of artist.tags) {
-		// 				if(this.tag.id === tag) {
-		// 					this.displayArtistsByTags(artist);
-		// 				}
-		// 			}
-		// 		}
-		// 	});
-		// }
 		this.portrait.addEventListener("click", () => {
 			this.portrait.style.borderColor = "rgba(200,0,28,1)";
 			for(const artist of this.data) {
@@ -134,18 +125,6 @@ class ManagerMain {
 	displayArtistsByTags(artist) {
 		console.log(artist);
 		this.taggedArtists.push(artist);
-		// for(const taggedArtist of this.taggedArtists) {
-		// 	if(taggedArtist != artist) {
-		// 		this.taggedArtists.push(artist);
-		// 	}
-		// 	if(taggedArtist == artist) {
-		// 		const list = this.taggedArtists;
-		// 		const index = list.indexOf(taggedArtist);
-		// 		list.splice(index, 1);
-		// 		list.push(artist);
-		// 		this.taggedArtist = list;
-		// 	} 
-		// }
 		return this.main.innerHTML = 
 			this.taggedArtists.map(artist => {
 				return (
