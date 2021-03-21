@@ -181,6 +181,22 @@ header {
 		}
 	}	
 }
+#container-media {
+	flex-direction: column;
+	padding: 20px 20px;
+	img {
+		
+	}
+	.infoPhotos {
+		padding: 10px 0;
+		justify-content: space-between;
+		color: $primary;
+		.priceAndLikes {
+			width: 27%;
+			justify-content: space-between;
+		}
+	}
+}
 
 
 

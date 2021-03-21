@@ -49,7 +49,16 @@ class ManagerPage {
 	displayMedia() {
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
-				return '<div>' + media.image + '</div>';
+				return (
+					'<img src="../images/photos/' + this.photographer.name + '/' + media.image + '" />' +
+					'<div class="infoPhotos flex">' + 
+						'<div>' + media.image + '</div>' + 
+						'<div class="priceAndLikes flex">' +
+							'<div>' + media.price + '€</div>' + 
+							'<div>' + media.likes + '<3</div>' + 
+						'</div>' +
+					'</div>'
+				)
 			});
 	}
 }

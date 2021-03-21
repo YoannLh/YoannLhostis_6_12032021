@@ -193,4 +193,18 @@ header .nav .nav__ul__li {
   color: #901c1c;
 }
 
+#container-media {
+  flex-direction: column;
+  padding: 20px 20px;
+}
+#container-media .infoPhotos {
+  padding: 10px 0;
+  justify-content: space-between;
+  color: #901c1c;
+}
+#container-media .infoPhotos .priceAndLikes {
+  width: 27%;
+  justify-content: space-between;
+}
+
 /*# sourceMappingURL=style.css.map */
