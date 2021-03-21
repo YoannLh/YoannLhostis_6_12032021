@@ -197,6 +197,27 @@ header {
 		}
 	}
 }
+.button {
+	position: fixed;
+	bottom: 30px;
+	left: 27.5%;
+	width: 45%;
+	height: 35px;
+	margin: auto;
+	background: $primary;
+	color: white;
+	font-weight: bold;
+	justify-content: center;
+	align-items: center;
+	border-radius: 6px;
+}
+footer {
+	padding: 20px;
+	p {
+		margin: auto;
+		color: grey;
+	}
+}
 
 
 

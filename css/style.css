@@ -207,4 +207,27 @@ header .nav .nav__ul__li {
   justify-content: space-between;
 }
 
+.button {
+  position: fixed;
+  bottom: 30px;
+  left: 27.5%;
+  width: 45%;
+  height: 35px;
+  margin: auto;
+  background: #901c1c;
+  color: white;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+}
+
+footer {
+  padding: 20px;
+}
+footer p {
+  margin: auto;
+  color: grey;
+}
+
 /*# sourceMappingURL=style.css.map */
