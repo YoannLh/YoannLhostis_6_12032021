@@ -42,6 +42,7 @@ class ManagerMain {
 	}
 	listenTags() {
 		this.portrait.addEventListener("click", () => {
+			this.taggedArtists = [];
 			this.portrait.style.borderColor = "rgba(200,0,28,1)";
 			for(const artist of this.data) {
 				for(const tag of artist.tags) {
@@ -52,6 +53,7 @@ class ManagerMain {
 			}
 		});
 		this.art.addEventListener("click", () => {
+			this.taggedArtists = [];
 			this.art.style.borderColor = "rgba(0,28,28,1)";
 			for(const artist of this.data) {
 				for(const tag of artist.tags) {
@@ -62,6 +64,7 @@ class ManagerMain {
 			}
 		});
 		this.fashion.addEventListener("click", () => {
+			this.taggedArtists = [];
 			this.fashion.style.borderColor = "rgba(144,255,50,1)";
 			for(const artist of this.data) {
 				for(const tag of artist.tags) {
@@ -72,6 +75,7 @@ class ManagerMain {
 			}
 		});
 		this.architecture.addEventListener("click", () => {
+			this.taggedArtists = [];
 			this.architecture.style.borderColor = "rgba(255,200,28,1)";
 			for(const artist of this.data) {
 				for(const tag of artist.tags) {
@@ -82,6 +86,7 @@ class ManagerMain {
 			}
 		});
 		this.travel.addEventListener("click", () => {
+			this.taggedArtists = [];
 			this.travel.style.borderColor = "rgba(0,28,255,1)";
 			for(const artist of this.data) {
 				for(const tag of artist.tags) {
@@ -92,6 +97,7 @@ class ManagerMain {
 			}
 		});
 		this.sport.addEventListener("click", () => {
+			this.taggedArtists = [];
 			this.sport.style.borderColor = "rgba(255,0,255,1)";
 			for(const artist of this.data) {
 				for(const tag of artist.tags) {
@@ -102,6 +108,7 @@ class ManagerMain {
 			}
 		});
 		this.animals.addEventListener("click", () => {
+			this.taggedArtists = [];
 			this.animals.style.borderColor = "rgba(0,255,255,1)";
 			for(const artist of this.data) {
 				for(const tag of artist.tags) {
@@ -112,6 +119,7 @@ class ManagerMain {
 			}
 		});
 		this.events.addEventListener("click", () => {
+			this.taggedArtists = [];
 			this.events.style.borderColor = "rgba(144,28,28,1)";
 			for(const artist of this.data) {
 				for(const tag of artist.tags) {
@@ -149,7 +157,7 @@ class ManagerMain {
 
 const managerMain = new ManagerMain();
 setTimeout(() => managerMain.displayPhotographersInMainPage(), 100);
-setTimeout(() => managerMain.listenTags(), 500);
+setTimeout(() => managerMain.listenTags(), 100);
 
 
 

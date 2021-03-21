@@ -55,7 +55,7 @@ class ManagerPage {
 						'<div>' + media.image + '</div>' + 
 						'<div class="priceAndLikes flex">' +
 							'<div>' + media.price + '€</div>' + 
-							'<div>' + media.likes + '<3</div>' + 
+							'<div>' + media.likes + '<i class="heart fas fa-heart"></i></div>' + 
 						'</div>' +
 					'</div>'
 				)
