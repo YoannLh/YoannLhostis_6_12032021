@@ -7,8 +7,10 @@ class ManagerPage {
 		this.id;
 		this.photographer;
 		this.media = [];
+		this.containerHearth = document.getElementById("containerHearth");
 		this.button = document.getElementById("button");
 		this.modal = document.getElementById("modal");
+		this.headerModalPhotographer = document.getElementById("headerModal__photographer");
 		this.firstname = document.getElementById("firstname");
 		this.lastname = document.getElementById("lastname");
 		this.email = document.getElementById("email");
@@ -69,11 +71,14 @@ class ManagerPage {
 			});
 	}
 	clickOnHearth() {
-			
+		// this.containerHearth.addEventListener("click", () => {
+		// 	console.log("hearth clicked");
+		// })
 	}
 	clickOnButtons() {
 		this.button.addEventListener("click", () => {
 			this.modal.style.display = "block";
+			this.headerModalPhotographer.innerHTML = this.photographer.name;
 		})
 		this.closeModal.addEventListener("click", () => {
 			this.modal.style.display = "none";
@@ -99,7 +104,7 @@ const managerPage = new ManagerPage();
 managerPage.getIdThenPhotographer();
 managerPage.askJsonForPhotosAndVideos();
 managerPage.displayPhotographer();
-managerPage.clickOnHearth();
+setTimeout(() => managerPage.clickOnHearth(), 1000);
 managerPage.clickOnButtons();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
