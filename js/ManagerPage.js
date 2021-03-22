@@ -7,6 +7,13 @@ class ManagerPage {
 		this.id;
 		this.photographer;
 		this.media = [];
+		this.button = document.getElementById("button");
+		this.modal = document.getElementById("modal");
+		this.firstname = document.getElementById("firstname");
+		this.lastname = document.getElementById("lastname");
+		this.email = document.getElementById("email");
+		this.message = document.getElementById("message");
+		this.closeModal = document.getElementById("closeModal");
 	}
 	getIdThenPhotographer() {
 		let params = new URLSearchParams(document.location.search.substring(1));
@@ -55,11 +62,36 @@ class ManagerPage {
 						'<div>' + media.image + '</div>' + 
 						'<div class="priceAndLikes flex">' +
 							'<div>' + media.price + '€</div>' + 
-							'<div>' + media.likes + '<i class="heart fas fa-heart"></i></div>' + 
+							'<div id="containerHearth">' + media.likes + '<i class="heart fas fa-heart"></i></div>' + 
 						'</div>' +
 					'</div>'
 				)
 			});
+	}
+	clickOnHearth() {
+			
+	}
+	clickOnButtons() {
+		this.button.addEventListener("click", () => {
+			this.modal.style.display = "block";
+		})
+		this.closeModal.addEventListener("click", () => {
+			this.modal.style.display = "none";
+		})
+	}
+	listeningInputs() {
+		this.firstname.addEventListener("input", () => {
+			console.log(event.target.value)
+		});
+		this.lastname.addEventListener("input", () => {
+			console.log(event.target.value)
+		});
+		this.email.addEventListener("input", () => {
+			console.log(event.target.value)
+		});
+		this.message.addEventListener("input", () => {
+			console.log(event.target.value)
+		});
 	}
 }
 
@@ -67,6 +99,9 @@ const managerPage = new ManagerPage();
 managerPage.getIdThenPhotographer();
 managerPage.askJsonForPhotosAndVideos();
 managerPage.displayPhotographer();
+managerPage.clickOnHearth();
+managerPage.clickOnButtons();
+managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
 
 
