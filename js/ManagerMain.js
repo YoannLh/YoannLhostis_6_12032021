@@ -1,6 +1,3 @@
-//sessionStorage.setItem("nameStationResa", response.name);
-
-//sessionStorage.getItem("nameStation");
 
 class ManagerMain {
 	constructor() {
@@ -22,6 +19,13 @@ class ManagerMain {
 		return this.main.innerHTML =
 			this.data.map(artist => {
 				sessionStorage.setItem("photographer" + artist.id + "", JSON.stringify(artist));
+
+				function displayTags() {
+					return artist.tags.map(tag => {
+						return '<div class="main__photographer__container__tags">#' + tag + '</div>'
+					});
+				}
+
 				return (
 					'<a href="./pages/photographer.html?id=' + artist.id + '">' +
 						'<section class="main__photographer">' +
@@ -33,7 +37,7 @@ class ManagerMain {
 								'<div class="main__photographer__description__city"><p>' + artist.city + ", " + artist.country + '</p></div>' +
 								'<div class="main__photographer__description__tagline"><p>' + artist.tagline + '</p></div>' +
 								'<div class="main__photographer__description__price"><p>' + artist.price + "€/jour" + '</p></div>' +
-								'<div class="main__photographer__tags">' + artist.tags + '</div>' + 
+								'<div class="main__photographer__container flex">' + displayTags() + '</div>' + 
 							'</div>' + 
 						'</section>' + 
 					'</a>'
@@ -136,7 +140,7 @@ class ManagerMain {
 		return this.main.innerHTML = 
 			this.taggedArtists.map(artist => {
 				return (
-					'<a href="./pages/' + artist.name + '.html">' +
+					'<a href="./pages/photographer.html?id=' + artist.id + '">' +
 						'<section class="main__photographer">' + 
 							'<div class="main__photographer__photo flex">' + 
 								'<img src="./images/photos/' + artist.name + '/' + artist.portrait + '" />' + 

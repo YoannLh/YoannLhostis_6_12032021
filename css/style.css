@@ -122,7 +122,10 @@ header .nav .nav__ul__li {
 #main .main__photographer .main__photographer__description .main__photographer__description__price {
   color: grey;
 }
-#main .main__photographer .main__photographer__description .main__photographer__tags {
+#main .main__photographer .main__photographer__description .main__photographer__container {
+  justify-content: center;
+}
+#main .main__photographer .main__photographer__description .main__photographer__container .main__photographer__container__tags {
   height: 13px;
   padding: 5px;
   margin: 2%;

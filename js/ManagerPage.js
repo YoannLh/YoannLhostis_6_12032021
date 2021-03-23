@@ -7,7 +7,8 @@ class ManagerPage {
 		this.id;
 		this.photographer;
 		this.media = [];
-		this.containerHearth = document.getElementById("containerHearth");
+		this.increment = -1;
+		this.arrayLikes = {first : "", "1" : ""};
 		this.button = document.getElementById("button");
 		this.modal = document.getElementById("modal");
 		this.headerModalPhotographer = document.getElementById("headerModal__photographer");
@@ -41,6 +42,11 @@ class ManagerPage {
 		request.open("GET", "../data/data.json");
         request.send();
 	}
+	displayTags() {
+		return this.photographer.tags.map(tag => {
+			return '<div class="mainInPage__photographer__tags">' + "#" + tag + '</div>';
+		})
+	}
 	displayPhotographer() {
 		return this.mainInPage.innerHTML =
 			'<section class="mainInPage__photographer">' + 
@@ -51,29 +57,44 @@ class ManagerPage {
 					'<div class="mainInPage__photographer__description__name"><p>' + this.photographer.name + '</p></div>' +
 					'<div class="mainInPage__photographer__description__city"><p>' + this.photographer.city + ", " + this.photographer.country + '</p></div>' +
 					'<div class="mainInPage__photographer__description__tagline"><p>' + this.photographer.tagline + '</p></div>' +
-					'<div class="mainInPage__photographer__tags">' + this.photographer.tags + '</div>' + 
+					'<div class="flex">' + this.displayTags() + '</div>' + 
 				'</div>' + 
 			'</section>'
 	}	
 	displayMedia() {
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
+				// Factory
+				this.increment++;
+				this.arrayLikes = { first : media.likes };
 				return (
 					'<img src="../images/photos/' + this.photographer.name + '/' + media.image + '" />' +
 					'<div class="infoPhotos flex">' + 
 						'<div>' + media.image + '</div>' + 
 						'<div class="priceAndLikes flex">' +
 							'<div>' + media.price + '€</div>' + 
-							'<div id="containerHearth">' + media.likes + '<i class="heart fas fa-heart"></i></div>' + 
+							'<div id="containerHearth">' + this.arrayLikes.first + '<i class="heart fas fa-heart"></i></div>' + 
 						'</div>' +
 					'</div>'
 				)
 			});
 	}
 	clickOnHearth() {
-		// this.containerHearth.addEventListener("click", () => {
-		// 	console.log("hearth clicked");
-		// })
+		// faire boucle pour recuperer tous les container
+		// objet pour les likes ?
+		let i = -1;
+		arrayMedia.map(containerHearth => {
+			
+			console.log(this.arrayLikes);
+			return document.getElementById("containerHearth").addEventListener("click", () => {
+				return document.getElementById("containerHearth").innerHTML = 
+					'<div id="containerHearth">' + (this.arrayLikes.first++) + 
+						'<i class="heart fas fa-heart"></i>' +
+					'</div>'
+			})
+		})
+
+		
 	}
 	clickOnButtons() {
 		this.button.addEventListener("click", () => {
@@ -104,7 +125,7 @@ const managerPage = new ManagerPage();
 managerPage.getIdThenPhotographer();
 managerPage.askJsonForPhotosAndVideos();
 managerPage.displayPhotographer();
-setTimeout(() => managerPage.clickOnHearth(), 1000);
+setTimeout(() => managerPage.clickOnHearth(), 300);
 managerPage.clickOnButtons();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);

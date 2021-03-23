@@ -110,16 +110,19 @@ header {
 			.main__photographer__description__price {
 				color: grey;
 			}
-			.main__photographer__tags {
-				height: 13px;
-				padding: 5px;
-				margin: 2%;
-				font-size: 0.8em;
-				font-weight: bold;
-				border: 1px solid rgb(212,212,212);
-				border-radius: 25px;
-				list-style-type: none;
-				color: $primary;
+			.main__photographer__container {
+				justify-content: center;
+				.main__photographer__container__tags {
+					height: 13px;
+					padding: 5px;
+					margin: 2%;
+					font-size: 0.8em;
+					font-weight: bold;
+					border: 1px solid rgb(212,212,212);
+					border-radius: 25px;
+					list-style-type: none;
+					color: $primary;
+				}
 			}
 		}
 	}
