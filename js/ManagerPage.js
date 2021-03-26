@@ -7,8 +7,6 @@ class ManagerPage {
 		this.id;
 		this.photographer;
 		this.media = [];
-		this.increment = -1;
-		this.arrayLikes = {first : "", "1" : ""};
 		this.button = document.getElementById("button");
 		this.modal = document.getElementById("modal");
 		this.headerModalPhotographer = document.getElementById("headerModal__photographer");
@@ -65,36 +63,30 @@ class ManagerPage {
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
 				// Factory
-				this.increment++;
-				this.arrayLikes = { first : media.likes };
 				return (
 					'<img src="../images/photos/' + this.photographer.name + '/' + media.image + '" />' +
 					'<div class="infoPhotos flex">' + 
 						'<div>' + media.image + '</div>' + 
 						'<div class="priceAndLikes flex">' +
 							'<div>' + media.price + '€</div>' + 
-							'<div id="containerHearth">' + this.arrayLikes.first + '<i class="heart fas fa-heart"></i></div>' + 
+							'<div id="containerHearth' + media.id + '">' + media.likes + '<i class="fas fa-heart" id="hearth' + media.id + '"></i></div>' + 
 						'</div>' +
 					'</div>'
 				)
 			});
 	}
 	clickOnHearth() {
-		// faire boucle pour recuperer tous les container
-		// objet pour les likes ?
-		let i = -1;
-		arrayMedia.map(containerHearth => {
-			
-			console.log(this.arrayLikes);
-			return document.getElementById("containerHearth").addEventListener("click", () => {
-				return document.getElementById("containerHearth").innerHTML = 
-					'<div id="containerHearth">' + (this.arrayLikes.first++) + 
-						'<i class="heart fas fa-heart"></i>' +
-					'</div>'
+		arrayMedia.map(media => {
+			document.getElementById("containerHearth" + media.id + "").addEventListener("click", () => {
+				console.log("clicked on " + media.id);
+				document.getElementById("containerHearth" + media.id + "").innerHTML =  
+					'<div id="containerHearth' + media.id + '">' + 
+						(media.likes + 1) + 
+						'<i class="fas fa-heart" id="hearth' + media.id + '"></i>' +
+					'</div>';
+					console.log(media.likes++);
 			})
 		})
-
-		
 	}
 	clickOnButtons() {
 		this.button.addEventListener("click", () => {
