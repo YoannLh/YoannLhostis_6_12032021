@@ -25,6 +25,9 @@ header {
 	#logo {
 		height: 35px;
 	}
+	@media screen and (min-width: 1024px) {
+		padding: 40px 80px;	
+	}
 	h1 {
 		font-size: 1em;
 		color: $primary;
@@ -69,20 +72,22 @@ header {
 #main {
 	position: relative;
 	top: 80px;
+	max-width: 1100px;
 	flex-direction: column;
 	justify-content: space-between;
 	@media screen and (min-width: 1024px) {
 		top: 0;
-		width: 60%;
+		width: 80%;
 		flex-direction: row;
 		flex-wrap: wrap;
 		margin: auto;
+		padding: 0 80px;	
 	}
 	.main__photographer {
-		margin: 1% auto;
+		margin: 3% auto 3% auto;
 		height: 350px;
 		@media screen and (min-width: 1024px) {
-			max-width: 240px;
+			
 		}
 		.main__photographer__photo {
 			height: 200px;
@@ -134,15 +139,17 @@ header {
 	justify-content: space-between;
 	@media screen and (min-width: 1024px) {
 		top: 0;
-		width: 60%;
+		width: 80%;
 		flex-direction: row;
 		flex-wrap: wrap;
-		margin: auto;
+		margin: auto;	
 	}
 	.mainInPage__photographer {
 		height: 125px;
+		flex-direction: column;
 		@media screen and (min-width: 1024px) {
-			max-width: 240px;
+			height: auto;
+			background: rgba(250,250,250,1);
 		}
 		.mainInPage__photographer__photo {
 			position: absolute;
@@ -154,14 +161,23 @@ header {
   				border-radius: 100%;
   				height: 100px;
   				width: 100px;
+  				@media screen and (min-width: 1024px) {
+					height: 150px;
+					width: 150px;		
+				}
 			}
 		}
 		.mainInPage__photographer__description {
-
+			@media screen and (min-width: 1024px) {
+				font-size: 1.3em;			
+			}
 			.mainInPage__photographer__description__name {
 				width: 70%;
 				font-size: 2em;
 				color: $secondary;
+				@media screen and (min-width: 1024px) {
+					width: auto;			
+				}
 			}	
 			.mainInPage__photographer__description__city {
 				color: $primary;
@@ -169,6 +185,9 @@ header {
 			.mainInPage__photographer__description__tagline {
 				color: black;
 				width: 70%;
+				@media screen and (min-width: 1024px) {
+					width: 100%;
+				}
 			}
 			.mainInPage__photographer__tags {
 				height: 13px;
@@ -184,16 +203,69 @@ header {
 		}
 	}	
 }
+#containerSortBy {
+	display: none;
+	position: relative;
+	@media screen and (min-width: 1024px) {
+		display: flex;
+		max-width: 1400px;
+		margin: 40px 80px;
+		align-items: center;	
+	}
+	#sortBy {
+		position: absolute;
+		left: 7%;
+		width: 12%;
+		height: 40px;
+		margin-left: 1%;
+		padding-left: 1%;
+		align-items: center;
+		border: 1px solid black;
+		border-radius: 4px;
+		transform-origin: top;
+		transform: scaleY(1);
+		transition: transform 300ms;
+		#sortByDate {
+			display: none;
+		}
+		#sortByTitle {
+			display: none;
+		}
+	}
+}
 #container-media {
 	flex-direction: column;
 	padding: 20px 20px;
-	img {
-		border-radius: 5px;
+	max-width: 1400px;
+	@media screen and (min-width: 1024px) {
+		margin: 40px auto;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 0 80px;	
+	}
+	.container-media__photo {
+		flex-direction: column;
+		@media screen and (min-width: 1024px) {
+			width: 30%;
+		}
+		img {
+			width: 100%;
+			height: 200px;
+			margin: auto;
+			object-fit: cover;
+			@media screen and (min-width: 1024px) {
+				height: 250px;
+			}
+		}
 	}
 	.infoPhotos {
 		padding: 10px 0;
 		justify-content: space-between;
 		color: $primary;
+		@media screen and (min-width: 1024px) {
+			
+		}
 		.priceAndLikes {
 			width: 27%;
 			justify-content: space-between;
@@ -217,6 +289,15 @@ header {
 	justify-content: center;
 	align-items: center;
 	border-radius: 6px;
+	@media screen and (min-width: 1024px) {
+		position: absolute;
+		margin: 0;
+		top: 125px;	
+		height: 27px;
+		width: auto;
+		padding: 7px;
+		font-weight: normal;
+	}
 }
 #modal {
 	display: none;
@@ -227,6 +308,14 @@ header {
 	height: 100%;
 	flex-direction: column;
 	background: rgba(219,136,118,1);
+	@media screen and (min-width: 1024px) {
+		top: 5%;
+		left: 35%;
+		max-width: 30%;
+		height: 90%;
+		margin: auto;
+		border-radius: 4px;
+	}
 	#headerModal {
 		padding: 20px 20px 0 20px;
 		font-size: 2em;
@@ -243,6 +332,10 @@ header {
 		padding: 20px;
 		margin-top: 10px;
 		font-size: 1.2em;
+		@media screen and (min-width: 1024px) {
+			margin-top: 0; 
+			padding-top: 0;
+		}
 		input {
 			display: block;
 			width: 100%;
@@ -252,15 +345,27 @@ header {
 			padding: 0;
 			border-radius: 5px;
 			border: 0;
+			@media screen and (min-width: 1024px) {
+				margin-top: 3px;
+				margin-bottom: 3px;
+			}
 		}
 		#message {
 			height: 200px;
+			@media screen and (min-width: 1024px) {
+				height: 120px;
+			}
 		}
 		button {
 			@extend #button;
 			position: relative;
 			top: 20px;
 			border: 0;
+			@media screen and (min-width: 1024px) {
+				top: 5px;
+				padding: 20px;
+				left: 0;
+			}
 		}
 	}
 }

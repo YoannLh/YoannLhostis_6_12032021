@@ -3,6 +3,10 @@ const arrayMedia = [];
 class ManagerPage {
 	constructor() {
 		this.mainInPage = document.getElementById("mainInPage");
+		this.sortBy = document.getElementById("sortBy");
+		this.sortByPopularity = document.getElementById("sortByPopularity");
+		this.sortByDate = document.getElementById("sortByDate");
+		this.sortByTitle = document.getElementById("sortByTitle");
 		this.containerMedia = document.getElementById("container-media");
 		this.id;
 		this.photographer;
@@ -34,7 +38,7 @@ class ManagerPage {
 						arrayMedia.push(media);
 					}
 				}
-				console.log(arrayMedia);
+			console.log(arrayMedia);
 			}
 		}
 		request.open("GET", "../data/data.json");
@@ -59,17 +63,44 @@ class ManagerPage {
 				'</div>' + 
 			'</section>'
 	}	
+	displaySortBy() {
+		// L'idée serait de cliquer sur sortBy, mais en même temps sur tous les elements empilés dessous
+		// Et ils translateY vers le bas
+		this.sortBy.addEventListener("click", () => {
+			this.sortBy.style.flexDirection = "column";
+			this.sortBy.style.background = "rgba(144,28,28,1)";
+			this.sortBy.style.color = "white";
+			this.sortBy.style.border = "0px solid black";
+			this.sortBy.style.borderRadius = "1.5px";
+			this.sortBy.style.transform = "scaleY(3)";
+			this.sortByDate.style.display = "block";
+			this.sortByTitle.style.display = "block";
+		})	
+	}
+	listeningSortBy() {
+		this.sortByPopularity.addEventListener("click", () => {
+			console.log("popularity");
+		})
+		this.sortByDate.addEventListener("click", () => {
+			console.log("date");	
+		})
+		this.sortByTitle.addEventListener("click", () => {
+			console.log("title");	
+		})
+	}
 	displayMedia() {
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
 				// Factory
 				return (
-					'<img src="../images/photos/' + this.photographer.name + '/' + media.image + '" />' +
-					'<div class="infoPhotos flex">' + 
-						'<div>' + media.image + '</div>' + 
-						'<div class="priceAndLikes flex">' +
-							'<div>' + media.price + '€</div>' + 
-							'<div id="containerHearth' + media.id + '">' + media.likes + '<i class="fas fa-heart" id="hearth' + media.id + '"></i></div>' + 
+					'<div class="container-media__photo">' +
+						'<img src="../images/photos/' + this.photographer.name + '/' + media.image + '" />' +
+						'<div class="infoPhotos flex">' + 
+							'<div>' + media.image + '</div>' + 
+							'<div class="priceAndLikes flex">' +
+								'<div>' + media.price + '€</div>' + 
+								'<div id="containerHearth' + media.id + '">' + media.likes + '<i class="fas fa-heart" id="hearth' + media.id + '"></i></div>' + 
+							'</div>' +
 						'</div>' +
 					'</div>'
 				)
@@ -78,13 +109,12 @@ class ManagerPage {
 	clickOnHearth() {
 		arrayMedia.map(media => {
 			document.getElementById("containerHearth" + media.id + "").addEventListener("click", () => {
-				console.log("clicked on " + media.id);
 				document.getElementById("containerHearth" + media.id + "").innerHTML =  
 					'<div id="containerHearth' + media.id + '">' + 
 						(media.likes + 1) + 
 						'<i class="fas fa-heart" id="hearth' + media.id + '"></i>' +
 					'</div>';
-					console.log(media.likes++);
+					media.likes++;
 			})
 		})
 	}
@@ -117,6 +147,8 @@ const managerPage = new ManagerPage();
 managerPage.getIdThenPhotographer();
 managerPage.askJsonForPhotosAndVideos();
 managerPage.displayPhotographer();
+managerPage.displaySortBy();
+managerPage.listeningSortBy();
 setTimeout(() => managerPage.clickOnHearth(), 300);
 managerPage.clickOnButtons();
 managerPage.listeningInputs();

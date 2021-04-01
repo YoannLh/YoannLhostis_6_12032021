@@ -27,6 +27,11 @@ header {
 header #logo {
   height: 35px;
 }
+@media screen and (min-width: 1024px) {
+  header {
+    padding: 40px 80px;
+  }
+}
 header h1 {
   font-size: 1em;
   color: #901c1c;
@@ -74,26 +79,23 @@ header .nav .nav__ul__li {
 #main {
   position: relative;
   top: 80px;
+  max-width: 1100px;
   flex-direction: column;
   justify-content: space-between;
 }
 @media screen and (min-width: 1024px) {
   #main {
     top: 0;
-    width: 60%;
+    width: 80%;
     flex-direction: row;
     flex-wrap: wrap;
     margin: auto;
+    padding: 0 80px;
   }
 }
 #main .main__photographer {
-  margin: 1% auto;
+  margin: 3% auto 3% auto;
   height: 350px;
-}
-@media screen and (min-width: 1024px) {
-  #main .main__photographer {
-    max-width: 240px;
-  }
 }
 #main .main__photographer .main__photographer__photo {
   height: 200px;
@@ -146,7 +148,7 @@ header .nav .nav__ul__li {
 @media screen and (min-width: 1024px) {
   #mainInPage {
     top: 0;
-    width: 60%;
+    width: 80%;
     flex-direction: row;
     flex-wrap: wrap;
     margin: auto;
@@ -154,10 +156,12 @@ header .nav .nav__ul__li {
 }
 #mainInPage .mainInPage__photographer {
   height: 125px;
+  flex-direction: column;
 }
 @media screen and (min-width: 1024px) {
   #mainInPage .mainInPage__photographer {
-    max-width: 240px;
+    height: auto;
+    background: #fafafa;
   }
 }
 #mainInPage .mainInPage__photographer .mainInPage__photographer__photo {
@@ -172,10 +176,26 @@ header .nav .nav__ul__li {
   height: 100px;
   width: 100px;
 }
+@media screen and (min-width: 1024px) {
+  #mainInPage .mainInPage__photographer .mainInPage__photographer__photo img {
+    height: 150px;
+    width: 150px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  #mainInPage .mainInPage__photographer .mainInPage__photographer__description {
+    font-size: 1.3em;
+  }
+}
 #mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__description__name {
   width: 70%;
   font-size: 2em;
   color: #d3573c;
+}
+@media screen and (min-width: 1024px) {
+  #mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__description__name {
+    width: auto;
+  }
 }
 #mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__description__city {
   color: #901c1c;
@@ -183,6 +203,11 @@ header .nav .nav__ul__li {
 #mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__description__tagline {
   color: black;
   width: 70%;
+}
+@media screen and (min-width: 1024px) {
+  #mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__description__tagline {
+    width: 100%;
+  }
 }
 #mainInPage .mainInPage__photographer .mainInPage__photographer__description .mainInPage__photographer__tags {
   height: 13px;
@@ -196,12 +221,71 @@ header .nav .nav__ul__li {
   color: #901c1c;
 }
 
+#containerSortBy {
+  display: none;
+  position: relative;
+}
+@media screen and (min-width: 1024px) {
+  #containerSortBy {
+    display: flex;
+    max-width: 1400px;
+    margin: 40px 80px;
+    align-items: center;
+  }
+}
+#containerSortBy #sortBy {
+  position: absolute;
+  left: 7%;
+  width: 12%;
+  height: 40px;
+  margin-left: 1%;
+  padding-left: 1%;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 4px;
+  transform-origin: top;
+  transform: scaleY(1);
+  transition: transform 300ms;
+}
+#containerSortBy #sortBy #sortByDate {
+  display: none;
+}
+#containerSortBy #sortBy #sortByTitle {
+  display: none;
+}
+
 #container-media {
   flex-direction: column;
   padding: 20px 20px;
+  max-width: 1400px;
 }
-#container-media img {
-  border-radius: 5px;
+@media screen and (min-width: 1024px) {
+  #container-media {
+    margin: 40px auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 80px;
+  }
+}
+#container-media .container-media__photo {
+  flex-direction: column;
+}
+@media screen and (min-width: 1024px) {
+  #container-media .container-media__photo {
+    width: 30%;
+  }
+}
+#container-media .container-media__photo img {
+  width: 100%;
+  height: 200px;
+  margin: auto;
+  object-fit: cover;
+}
+@media screen and (min-width: 1024px) {
+  #container-media .container-media__photo img {
+    height: 250px;
+  }
 }
 #container-media .infoPhotos {
   padding: 10px 0;
@@ -231,6 +315,17 @@ header .nav .nav__ul__li {
   align-items: center;
   border-radius: 6px;
 }
+@media screen and (min-width: 1024px) {
+  #button, #modal form button {
+    position: absolute;
+    margin: 0;
+    top: 125px;
+    height: 27px;
+    width: auto;
+    padding: 7px;
+    font-weight: normal;
+  }
+}
 
 #modal {
   display: none;
@@ -241,6 +336,16 @@ header .nav .nav__ul__li {
   height: 100%;
   flex-direction: column;
   background: #db8876;
+}
+@media screen and (min-width: 1024px) {
+  #modal {
+    top: 5%;
+    left: 35%;
+    max-width: 30%;
+    height: 90%;
+    margin: auto;
+    border-radius: 4px;
+  }
 }
 #modal #headerModal {
   padding: 20px 20px 0 20px;
@@ -259,6 +364,12 @@ header .nav .nav__ul__li {
   margin-top: 10px;
   font-size: 1.2em;
 }
+@media screen and (min-width: 1024px) {
+  #modal form {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
 #modal form input {
   display: block;
   width: 100%;
@@ -269,13 +380,31 @@ header .nav .nav__ul__li {
   border-radius: 5px;
   border: 0;
 }
+@media screen and (min-width: 1024px) {
+  #modal form input {
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+}
 #modal form #message {
   height: 200px;
+}
+@media screen and (min-width: 1024px) {
+  #modal form #message {
+    height: 120px;
+  }
 }
 #modal form button {
   position: relative;
   top: 20px;
   border: 0;
+}
+@media screen and (min-width: 1024px) {
+  #modal form button {
+    top: 5px;
+    padding: 20px;
+    left: 0;
+  }
 }
 
 footer {

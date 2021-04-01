@@ -15,6 +15,18 @@
 			</a>
 		</header>
 		<main id="mainInPage"></main>
+		<div id="containerSortBy">
+				<p style="font-weight: bold;">Trier par</p>
+				<div id="sortBy" class="flex">
+					<p id="sortByPopularity">Popularité</p>
+					<!-- Il faudrait que les 2 autres <p> (ci-dessous) sois sous le premier (sortByPopularity)
+					Au clic sur les 3 en js, les deux autres translateY de Xpx, différé de la hauteur de l'autre
+					Sinon aussi hein ! tableau brut qui pop, mais moche pour la soutenance... 
+					// Attention la vraie difficulté ici, c'est le tri des medias ! -->
+					<p id="sortByDate">Date</p>
+					<p id="sortByTitle">Titre</p>
+				</div>
+		</div>
 		<div id="container-media" class="flex">
 			<div id="likes"></div>
 		</div>
@@ -36,11 +48,11 @@
 				<input type="email" id="email">
 				<label>Votre message</label>
 				<input type="text" id="message">
-				<button>Envoyer</button>
+				<button class="flex">Envoyer</button>
 			</form>
 		</div>
 		<footer class="flex">
-			<p>* FishEye Agency *</p>	
+			<!-- <p>* FishEye Agency *</p> -->	
 		</footer>
 		<script src="../js/ManagerPage.js"></script>
 	</body>
