@@ -2,6 +2,7 @@ const arrayMedia = [];
 
 class ManagerPage {
 	constructor() {
+		this.body = document.getElementById("body");
 		this.mainInPage = document.getElementById("mainInPage");
 		this.sortBy = document.getElementById("sortBy");
 		this.sortByPopularity = document.getElementById("sortByPopularity");
@@ -63,29 +64,33 @@ class ManagerPage {
 				'</div>' + 
 			'</section>'
 	}	
-	displaySortBy() {
-		// L'idée serait de cliquer sur sortBy, mais en même temps sur tous les elements empilés dessous
-		// Et ils translateY vers le bas
-		this.sortBy.addEventListener("click", () => {
-			this.sortBy.style.flexDirection = "column";
-			this.sortBy.style.background = "rgba(144,28,28,1)";
-			this.sortBy.style.color = "white";
-			this.sortBy.style.border = "0px solid black";
-			this.sortBy.style.borderRadius = "1.5px";
-			this.sortBy.style.transform = "scaleY(3)";
-			this.sortByDate.style.display = "block";
-			this.sortByTitle.style.display = "block";
-		})	
-	}
 	listeningSortBy() {
 		this.sortByPopularity.addEventListener("click", () => {
 			console.log("popularity");
+			this.sortByPopularity.style.zIndex = "4";
+			this.sortByDate.style.zIndex = "3";
+			this.sortByTitle.style.zIndex = "3";
+			this.sortByPopularity.style.fontWeight = "bold";
+			this.sortByDate.style.fontWeight = "normal";
+			this.sortByTitle.style.fontWeight = "normal";
 		})
 		this.sortByDate.addEventListener("click", () => {
 			console.log("date");	
+			this.sortByPopularity.style.zIndex = "3";
+			this.sortByDate.style.zIndex = "4";
+			this.sortByTitle.style.zIndex = "3";
+			this.sortByDate.style.fontWeight = "bold";
+			this.sortByPopularity.style.fontWeight = "normal";
+			this.sortByTitle.style.fontWeight = "normal";
 		})
 		this.sortByTitle.addEventListener("click", () => {
-			console.log("title");	
+			console.log("title");
+			this.sortByPopularity.style.zIndex = "3";
+			this.sortByDate.style.zIndex = "3";
+			this.sortByTitle.style.zIndex = "4";
+			this.sortByTitle.style.fontWeight = "bold";
+			this.sortByPopularity.style.fontWeight = "normal";
+			this.sortByDate.style.fontWeight = "normal";
 		})
 	}
 	displayMedia() {
@@ -147,7 +152,6 @@ const managerPage = new ManagerPage();
 managerPage.getIdThenPhotographer();
 managerPage.askJsonForPhotosAndVideos();
 managerPage.displayPhotographer();
-managerPage.displaySortBy();
 managerPage.listeningSortBy();
 setTimeout(() => managerPage.clickOnHearth(), 300);
 managerPage.clickOnButtons();

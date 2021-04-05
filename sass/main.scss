@@ -214,22 +214,86 @@ header {
 	}
 	#sortBy {
 		position: absolute;
-		left: 7%;
+		left: 10%;
 		width: 12%;
 		height: 40px;
 		margin-left: 1%;
-		padding-left: 1%;
+		padding-top: auto;
 		align-items: center;
 		border: 1px solid black;
 		border-radius: 4px;
-		transform-origin: top;
-		transform: scaleY(1);
-		transition: transform 300ms;
+		z-index: 1;
+		&:hover {
+			border: 0 solid black;
+			border-radius: 4px 4px 0 0;
+			background: rgba(144,28,28,1);
+			#sortByPopularity {
+				background: rgba(144,28,28,1);
+				color: white;
+			}
+			#sortByDate {
+				transform: translateY(100%);
+				background: rgba(144,28,28,1);
+				color: white;
+			}
+			#sortByTitle {
+				transform: translateY(200%);
+				background: rgba(144,28,28,1);
+				border-radius: 0 0 4px 4px;
+				color: white;
+			}
+		}
+		#sortByPopularity {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 40px;
+			margin-left: 4%;
+			background: white;
+			z-index: 4;
+			p {
+				margin: auto;
+			}
+		}
 		#sortByDate {
-			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 40px;
+			align-items: center;
+			background: white;
+			z-index: 3;
+			transform: translateY(0);
+			transition: transform 300ms;
 		}
 		#sortByTitle {
-			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 40px;
+			align-items: center;
+			background: white;
+			z-index: 3;
+			transform: translateY(0);
+			transition: transform 300ms;
+		}
+		.barre2 {
+			position: absolute;
+			bottom: 0;
+			width: 90%;
+			height: 1px;
+			margin-left: 5%;
+			background: white;
+		}
+		.barre1 {
+			position: absolute;
+			top: 0;
+			width: 90%;
+			height: 1px;
+			margin-left: 5%;
+			background: white;
 		}
 	}
 }

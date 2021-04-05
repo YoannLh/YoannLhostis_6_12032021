@@ -8,7 +8,7 @@
 		<script src="https://kit.fontawesome.com/253fa00d75.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
-	<body>
+	<body id="body">
 		<header class="flex">
 			<a href="../index.html">
 				<img id="logo" src="../images/logo_fisheye.png" alt="logo-agence-fisheye">
@@ -18,13 +18,21 @@
 		<div id="containerSortBy">
 				<p style="font-weight: bold;">Trier par</p>
 				<div id="sortBy" class="flex">
-					<p id="sortByPopularity">Popularité</p>
+					<div id="sortByPopularity" class="flex">
+						<p>Popularité</p>
+					</div>
 					<!-- Il faudrait que les 2 autres <p> (ci-dessous) sois sous le premier (sortByPopularity)
 					Au clic sur les 3 en js, les deux autres translateY de Xpx, différé de la hauteur de l'autre
 					Sinon aussi hein ! tableau brut qui pop, mais moche pour la soutenance... 
 					// Attention la vraie difficulté ici, c'est le tri des medias ! -->
-					<p id="sortByDate">Date</p>
-					<p id="sortByTitle">Titre</p>
+					<div id="sortByDate" class="flex">
+						<div class="barre1"></div>
+						<p>Date</p>
+						<div class="barre2"></div>
+					</div>
+					<div id="sortByTitle" class="flex">
+						<p>Titre</p>
+					</div>
 				</div>
 		</div>
 		<div id="container-media" class="flex">
