@@ -1,13 +1,14 @@
+
 const arrayMedia = [];
 
 class ManagerPage {
 	constructor() {
-		this.body = document.getElementById("body");
 		this.mainInPage = document.getElementById("mainInPage");
 		this.sortBy = document.getElementById("sortBy");
 		this.sortByPopularity = document.getElementById("sortByPopularity");
 		this.sortByDate = document.getElementById("sortByDate");
 		this.sortByTitle = document.getElementById("sortByTitle");
+		this.sortByArray = [];
 		this.containerMedia = document.getElementById("container-media");
 		this.id;
 		this.photographer;
@@ -73,6 +74,9 @@ class ManagerPage {
 			this.sortByPopularity.style.fontWeight = "bold";
 			this.sortByDate.style.fontWeight = "normal";
 			this.sortByTitle.style.fontWeight = "normal";
+			// trier (sort ?) puis
+			// this.sortByArray.push();
+			// puis this.sortByArray.map();
 		})
 		this.sortByDate.addEventListener("click", () => {
 			console.log("date");	
@@ -82,6 +86,9 @@ class ManagerPage {
 			this.sortByDate.style.fontWeight = "bold";
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByTitle.style.fontWeight = "normal";
+			// trier (sort ?) puis
+			// this.sortByArray.push();
+			// puis this.sortByArray.map();
 		})
 		this.sortByTitle.addEventListener("click", () => {
 			console.log("title");
@@ -91,24 +98,25 @@ class ManagerPage {
 			this.sortByTitle.style.fontWeight = "bold";
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByDate.style.fontWeight = "normal";
+			// trier (sort ?) puis
+			// this.sortByArray.push();
+			// puis this.sortByArray.map();
 		})
 	}
 	displayMedia() {
+		// A factoriser
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
-				// Factory
-				return (
-					'<div class="container-media__photo">' +
-						'<img src="../images/photos/' + this.photographer.name + '/' + media.image + '" />' +
-						'<div class="infoPhotos flex">' + 
-							'<div>' + media.image + '</div>' + 
-							'<div class="priceAndLikes flex">' +
-								'<div>' + media.price + '€</div>' + 
-								'<div id="containerHearth' + media.id + '">' + media.likes + '<i class="fas fa-heart" id="hearth' + media.id + '"></i></div>' + 
-							'</div>' +
-						'</div>' +
-					'</div>'
-				)
+				if(media.image) {
+					const newMedia = new MediaFactory(this.photographer.name, "image", media.date, media.id, media.likes, media.price, media.tags, media.image);
+					console.log(newMedia);
+					return newMedia.displayNewMedia();
+				}
+				if(media.video) {
+					const newMedia = new MediaFactory(this.photographer.name, "vidéo", media.date, media.id, media.likes, media.price, media.tags, media.video);
+					console.log(newMedia);
+					return newMedia.displayNewMedia();
+				}
 			});
 	}
 	clickOnHearth() {
@@ -157,6 +165,8 @@ setTimeout(() => managerPage.clickOnHearth(), 300);
 managerPage.clickOnButtons();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
+
+
 
 
 
