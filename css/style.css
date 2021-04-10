@@ -340,14 +340,14 @@ header .nav .nav__ul__li {
     width: 30%;
   }
 }
-#container-media .container-media__photo img {
+#container-media .container-media__photo img, #container-media .container-media__photo video {
   width: 100%;
   height: 200px;
   margin: auto;
   object-fit: cover;
 }
 @media screen and (min-width: 1024px) {
-  #container-media .container-media__photo img {
+  #container-media .container-media__photo img, #container-media .container-media__photo video {
     height: 250px;
   }
 }
