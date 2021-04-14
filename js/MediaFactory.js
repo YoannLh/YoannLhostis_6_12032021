@@ -11,11 +11,29 @@ class MediaFactory {
 		this.media = image;
 		this.cleanedTitle;
 	}
+	cleanTags() {
+		if(this.tags[0] == "portait") {
+			this.tags[0] = "portrait";
+		}
+		if(this.tags[0] == "events") {
+			this.tags[0] = "event";
+		}
+	}
 	cleanTitles() {
-		console.log(this.tags);
-		this.cleanedTitle = this.media.split(/^(Travel_)+(\w+)+(\.jpg)+$/);
-		console.log("splitted : " + this.cleanedTitle);
-		return this.cleanedTitle[2];
+		this.cleanTags();
+		console.log("this.tags : " + this.tags);
+		let firstLetter = this.tags[0].split("");
+		console.log("firstletter : " + firstLetter);
+		let newMaj = this.tags[0].replace(/[a-z]/, firstLetter[0].toUpperCase());
+		console.log("newMaj : " + newMaj);
+		const regex1 = new RegExp(newMaj + '_');
+		console.log("regex1 : " + regex1);
+		const regex2 = new RegExp(/\.jpg/); // rajouter .mp4
+		console.log("regex2 : " + regex2)
+		this.cleanedTitle = this.media.split(regex1);
+		const clean = this.cleanedTitle[1].split(regex2);
+		console.log("splitted : " + clean[0]);
+		return clean[0];
 	}
 	makeMiniatureIfVideoIfNotReturnImage() {
 		if(this.type == "vidéo") {
