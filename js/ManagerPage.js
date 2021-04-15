@@ -10,8 +10,11 @@ class ManagerPage {
 		this.sortByTitle = document.getElementById("sortByTitle");
 		this.sortByArray = [];
 		this.containerMedia = document.getElementById("container-media");
+		//this.media = document.getElementById("container-media__photo");
 		this.id;
 		this.photographer;
+		this.totalLikes = document.getElementById("totalLikes");
+		this.price = document.getElementById("price");
 		this.media = [];
 		this.button = document.getElementById("button");
 		this.modal = document.getElementById("modal");
@@ -98,7 +101,13 @@ class ManagerPage {
 			this.sortByTitle.style.fontWeight = "bold";
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByDate.style.fontWeight = "normal";
-			// trier (sort ?) puis
+			console.log("arrayMedia : " + arrayMedia[0].image);
+			for(const media of arrayMedia) {
+				media.sort();
+				return arrayMedia;
+			}
+			console.log("arrayMedia : " + arrayMedia[0].image);
+			// arrayMedia.sort();
 			// this.sortByArray.push();
 			// puis this.sortByArray.map();
 		})
@@ -119,8 +128,14 @@ class ManagerPage {
 				}
 			});
 	}
+	displayLightBox() {
+		
+	}
 	clickOnHearth() {
+		let totalLikes = 0;
 		arrayMedia.map(media => {
+			totalLikes += media.likes;
+			//this.totalLikes.innerHTML = totalLikes;
 			document.getElementById("containerHearth" + media.id + "").addEventListener("click", () => {
 				document.getElementById("containerHearth" + media.id + "").innerHTML =  
 					'<div id="containerHearth' + media.id + '">' + 
@@ -128,8 +143,13 @@ class ManagerPage {
 						'<i class="fas fa-heart" id="hearth' + media.id + '"></i>' +
 					'</div>';
 					media.likes++;
-			})
+					this.totalLikes.innerHTML = '' + (totalLikes + 1) + ' ' + '<i class="fas fa-heart"></i>';
+					totalLikes++;
+				})
+			this.totalLikes.innerHTML = totalLikes + ' ' + '<i class="fas fa-heart"></i>';
 		})
+	}displayPrice() {
+		this.price.innerHTML = '' + this.photographer.price + '€ / jour';
 	}
 	clickOnButtons() {
 		this.button.addEventListener("click", () => {
@@ -162,9 +182,12 @@ managerPage.askJsonForPhotosAndVideos();
 managerPage.displayPhotographer();
 managerPage.listeningSortBy();
 setTimeout(() => managerPage.clickOnHearth(), 300);
+managerPage.displayPrice();
 managerPage.clickOnButtons();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
+managerPage.displayLightBox();
+
 
 
 

@@ -9,7 +9,14 @@ class MediaFactory {
 		this.price = price;
 		this.tags = tags;
 		this.media = image;
+		this.titleUpperCaseDone;
 		this.cleanedTitle;
+	}
+	titleToUpperCase() {
+		let allLetters = this.media.split("");
+		console.log("firstletter title : " + allLetters);
+		this.titleUpperCaseDone = this.media.replace(/[a-z]?[A-Z]?/, allLetters[0].toUpperCase());
+		console.log("newTitle : " + this.titleUpperCaseDone);
 	}
 	cleanTags() {
 		if(this.tags[0] == "portait") {
@@ -20,20 +27,24 @@ class MediaFactory {
 		}
 	}
 	cleanTitles() {
+		this.titleToUpperCase();
 		this.cleanTags();
-		console.log("this.tags : " + this.tags);
-		let firstLetter = this.tags[0].split("");
-		console.log("firstletter : " + firstLetter);
-		let newMaj = this.tags[0].replace(/[a-z]/, firstLetter[0].toUpperCase());
-		console.log("newMaj : " + newMaj);
-		const regex1 = new RegExp(newMaj + '_');
+		let allLetters = this.tags[0].split("");
+		let newTag = this.tags[0].replace(/[a-z]/, allLetters[0].toUpperCase());
+		const regex1 = new RegExp(newTag);
 		console.log("regex1 : " + regex1);
-		const regex2 = new RegExp(/\.jpg/); // rajouter .mp4
-		console.log("regex2 : " + regex2)
-		this.cleanedTitle = this.media.split(regex1);
-		const clean = this.cleanedTitle[1].split(regex2);
-		console.log("splitted : " + clean[0]);
-		return clean[0];
+		const regex2 = new RegExp(/^(-)+(_)+$/);
+		console.log("regex2 : " + regex2);
+		const regex3 = new RegExp(/\.jpg/); // rajouter .mp4
+		console.log("regex3 : " + regex3);
+		let newTitle = this.titleUpperCaseDone.split(regex1);
+		console.log("newTitle : " + newTitle);
+		const cleanFormat = newTitle[1].split(regex3);
+		console.log("splitted : " + cleanFormat[0]);
+		let cleanUnderscore = cleanFormat[0].replace(/(_)/gi, " ");
+		let cleanTiret = cleanUnderscore.replace(/-/gi, " ");
+		console.log("cleanTiret : " + cleanTiret);
+		return cleanTiret;
 	}
 	makeMiniatureIfVideoIfNotReturnImage() {
 		if(this.type == "vidéo") {
@@ -45,7 +56,7 @@ class MediaFactory {
 	}
 	displayNewMedia() {
 		return (
-			'<div class="container-media__photo">' +
+			'<div id="container-media__photo">' +
 				this.makeMiniatureIfVideoIfNotReturnImage() +
 				'<div class="infoPhotos flex">' + 
 					'<div>' + this.cleanTitles() + '</div>' + 
