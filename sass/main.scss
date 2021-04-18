@@ -379,7 +379,7 @@ header {
 	}
 	#totalLikes, #price {
 		margin: auto;
-		font-size: 1.5em;
+		font-size: 1.4em;
 	}
 }
 #modal {
@@ -450,6 +450,46 @@ header {
 				left: 0;
 			}
 		}
+	}
+}
+#modalLightBox {
+	display: none;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: white;
+	z-index: 2;
+	#closeModalLightBox {
+		display: block;
+		position: absolute;
+		top: 2%;
+		right: 4%;
+		font-size: 1.3em;
+		z-index: 2;
+	}
+	#modalLightBoxLeft {
+		position: absolute;
+		left: 5%;
+		top: 49%;
+	}
+	#modalLightBox-containerImg {
+		margin: auto;
+		width: 85%;
+		height: 100%;
+		img {
+			width: 85%;
+			margin: auto;
+			@media screen and (min-width: 1024px) {
+				height: 90%;
+				width: auto;
+			}
+		}
+	}
+	#modalLightBoxRight {
+		position: absolute;
+		right: 5%;
+		top: 49%;
 	}
 }
 footer {

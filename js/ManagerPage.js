@@ -1,5 +1,5 @@
 
-const arrayMedia = [];
+let arrayMedia = [];
 
 class ManagerPage {
 	constructor() {
@@ -10,7 +10,6 @@ class ManagerPage {
 		this.sortByTitle = document.getElementById("sortByTitle");
 		this.sortByArray = [];
 		this.containerMedia = document.getElementById("container-media");
-		//this.media = document.getElementById("container-media__photo");
 		this.id;
 		this.photographer;
 		this.totalLikes = document.getElementById("totalLikes");
@@ -24,6 +23,11 @@ class ManagerPage {
 		this.email = document.getElementById("email");
 		this.message = document.getElementById("message");
 		this.closeModal = document.getElementById("closeModal");
+		this.modalLightBox = document.getElementById("modalLightBox");
+		this.closeModalLightBox = document.getElementById("closeModalLightBox");
+		this.modalLightBoxLeft = document.getElementById("modalLightBoxLeft");
+		this.modalLightBoxContainerImg = document.getElementById("modalLightBox-containerImg");
+		this.modalLightBoxRight = document.getElementById("modalLightBoxRight");
 	}
 	getIdThenPhotographer() {
 		let params = new URLSearchParams(document.location.search.substring(1));
@@ -51,6 +55,7 @@ class ManagerPage {
 	}
 	displayTags() {
 		return this.photographer.tags.map(tag => {
+			console.log("tag : " + this.photographer.tags);
 			return '<div class="mainInPage__photographer__tags">' + "#" + tag + '</div>';
 		})
 	}
@@ -101,20 +106,15 @@ class ManagerPage {
 			this.sortByTitle.style.fontWeight = "bold";
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByDate.style.fontWeight = "normal";
-			console.log("arrayMedia : " + arrayMedia[0].image);
-			for(const media of arrayMedia) {
-				media.sort();
-				return arrayMedia;
-			}
-			console.log("arrayMedia : " + arrayMedia[0].image);
-			// arrayMedia.sort();
-			// this.sortByArray.push();
-			// puis this.sortByArray.map();
-		})
-	}
-	displayMedia() {
-		// A factoriser
-		return this.containerMedia.innerHTML =
+
+
+			arrayMedia.map(media => {
+				this.sortByArray.push({image: media.image, video: media.video, date: media.date, likes: media.likes, price: media.price});
+			})
+			this.sortByArray.sort();
+			arrayMedia = this.sortByArray;
+			console.log(arrayMedia);
+			return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
 				if(media.image) {
 					const newMedia = new MediaFactory(this.photographer.name, "image", media.date, media.id, media.likes, media.price, media.tags, media.image);
@@ -127,9 +127,58 @@ class ManagerPage {
 					return newMedia.displayNewMedia();
 				}
 			});
+			
+
+		})
 	}
-	displayLightBox() {
-		
+	displayMedia() {
+		// A factoriser
+		return this.containerMedia.innerHTML =
+			arrayMedia.map(media => {
+				if(media.image) {
+					const newMedia = new MediaFactory(this.photographer.name, "image", media.date, media.id, media.likes, media.price, media.tags, media.image);
+					return newMedia.displayNewMedia();
+				}
+				if(media.video) {
+					const newMedia = new MediaFactory(this.photographer.name, "vidéo", media.date, media.id, media.likes, media.price, media.tags, media.video);
+					return newMedia.displayNewMedia();
+				}
+			});
+	}
+	searchMediaForLightBox() {
+		for(const media of arrayMedia) {
+			document.getElementById(media.id).addEventListener("click", () => {
+			// Ces id ont été créés dans makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<img id=this.id...)	
+				this.displayModalLightBox(this.photographer.name, media.image, arrayMedia.indexOf(media));
+			})
+		}
+	}
+	displayModalLightBox(name, image, index) {
+		let longueur = arrayMedia.length - 1;
+		let newIndex = index;
+		this.modalLightBox.style.display = "flex";
+		this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + image + '" />';
+		this.modalLightBoxLeft.addEventListener("click", () => {
+			newIndex--;
+			if(newIndex === -1) {
+				newIndex = longueur;
+			}
+			arrayMedia.map(media => {
+				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />';
+			})
+		})
+		this.modalLightBoxRight.addEventListener("click", () => {
+			newIndex++;
+			if(newIndex === longueur + 1) {
+				newIndex = index;
+			}
+			arrayMedia.map(media => {
+				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />';
+			})
+		})
+		this.closeModalLightBox.addEventListener("click", () => {
+			this.modalLightBox.style.display = "none";
+		})
 	}
 	clickOnHearth() {
 		let totalLikes = 0;
@@ -186,7 +235,7 @@ managerPage.displayPrice();
 managerPage.clickOnButtons();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
-managerPage.displayLightBox();
+setTimeout(() => managerPage.searchMediaForLightBox(), 100);
 
 
 

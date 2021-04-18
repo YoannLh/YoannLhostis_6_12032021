@@ -48,10 +48,10 @@ class MediaFactory {
 	}
 	makeMiniatureIfVideoIfNotReturnImage() {
 		if(this.type == "vidéo") {
-			return '<video src="../images/photos/' + this.name + '/' + this.media + '" type="video/mp4">' + this.media + '</video>';
+			return '<video id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" type="video/mp4">' + this.media + '</video>';
 		}
 		if(this.type == "image") {
-			return '<img src="../images/photos/' + this.name + '/' + this.media + '" />';
+			return '<img id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" />';
 		}
 	}
 	displayNewMedia() {
