@@ -242,6 +242,9 @@ header {
 				border-radius: 0 0 4px 4px;
 				color: white;
 			}
+			.fa-chevron-up {
+				transform: rotate(180deg);
+			}
 		}
 		#sortByPopularity {
 			position: absolute;
@@ -294,6 +297,12 @@ header {
 			height: 1px;
 			margin-left: 5%;
 			background: white;
+		}
+		.fa-chevron-up {
+			position: absolute;
+			right: 8%;
+			z-index: 5;
+			transform: rotate(0);
 		}
 	}
 }

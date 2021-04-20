@@ -265,6 +265,9 @@ header .nav .nav__ul__li {
   border-radius: 0 0 4px 4px;
   color: white;
 }
+#containerSortBy #sortBy:hover .fa-chevron-up {
+  transform: rotate(180deg);
+}
 #containerSortBy #sortBy #sortByPopularity {
   position: absolute;
   top: 0;
@@ -316,6 +319,12 @@ header .nav .nav__ul__li {
   height: 1px;
   margin-left: 5%;
   background: white;
+}
+#containerSortBy #sortBy .fa-chevron-up {
+  position: absolute;
+  right: 8%;
+  z-index: 5;
+  transform: rotate(0);
 }
 
 #container-media {

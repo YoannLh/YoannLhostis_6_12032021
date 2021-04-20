@@ -82,9 +82,11 @@ class ManagerPage {
 			this.sortByPopularity.style.fontWeight = "bold";
 			this.sortByDate.style.fontWeight = "normal";
 			this.sortByTitle.style.fontWeight = "normal";
-			// trier (sort ?) puis
-			// this.sortByArray.push();
-			// puis this.sortByArray.map();
+			// trie et renvoie arrayMedia par likes décroissants
+			arrayMedia.sort((a, b) => {
+ 				return b.likes - a.likes;
+			})
+			this.displayMedia();
 		})
 		this.sortByDate.addEventListener("click", () => {
 			console.log("date");	
@@ -94,9 +96,13 @@ class ManagerPage {
 			this.sortByDate.style.fontWeight = "bold";
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByTitle.style.fontWeight = "normal";
-			// trier (sort ?) puis
-			// this.sortByArray.push();
-			// puis this.sortByArray.map();
+			// trie et renvoie arrayMedia par dates croissantes
+			arrayMedia.sort(function (a, b) {
+ 				return a.date.replace(/-/gi, "") - b.date.replace(/-/gi, "");
+			})
+			console.log(arrayMedia);
+			this.displayMedia();
+
 		})
 		this.sortByTitle.addEventListener("click", () => {
 			console.log("title");
@@ -106,29 +112,12 @@ class ManagerPage {
 			this.sortByTitle.style.fontWeight = "bold";
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByDate.style.fontWeight = "normal";
-
-
-			arrayMedia.map(media => {
-				this.sortByArray.push({image: media.image, video: media.video, date: media.date, likes: media.likes, price: media.price});
+			// trie et renvoie arrayMedia par ordre alphabétique des titres
+			arrayMedia.sort(function (a, b) {
+ 				return a.image + b.image;
 			})
-			this.sortByArray.sort();
-			arrayMedia = this.sortByArray;
 			console.log(arrayMedia);
-			return this.containerMedia.innerHTML =
-			arrayMedia.map(media => {
-				if(media.image) {
-					const newMedia = new MediaFactory(this.photographer.name, "image", media.date, media.id, media.likes, media.price, media.tags, media.image);
-					console.log(newMedia);
-					return newMedia.displayNewMedia();
-				}
-				if(media.video) {
-					const newMedia = new MediaFactory(this.photographer.name, "vidéo", media.date, media.id, media.likes, media.price, media.tags, media.video);
-					console.log(newMedia);
-					return newMedia.displayNewMedia();
-				}
-			});
-			
-
+			this.displayMedia();
 		})
 	}
 	displayMedia() {
@@ -147,29 +136,39 @@ class ManagerPage {
 	}
 	searchMediaForLightBox() {
 		for(const media of arrayMedia) {
-			document.getElementById(media.id).addEventListener("click", () => {
-			// Ces id ont été créés dans makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<img id=this.id...)	
-				this.displayModalLightBox(this.photographer.name, media.image, arrayMedia.indexOf(media));
-			})
+			if(media.image) {
+				document.getElementById(media.id).addEventListener("click", () => {
+					// Ces id ont été créés dans makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<img id=this.id...)	
+					this.displayModalLightBox(this.photographer.name, media.image, arrayMedia.indexOf(media));
+				})
+			}
+			if(media.video) {
+				document.getElementById(media.id).addEventListener("click", () => {
+					// Ces id ont été créés dans makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<img id=this.id...)	
+					this.displayModalLightBox(this.photographer.name, media.video, arrayMedia.indexOf(media));
+				})
+			}	
 		}
 	}
 	displayModalLightBox(name, image, index) {
-		let longueur = arrayMedia.length - 1;
+		let length = arrayMedia.length - 1;
 		let newIndex = index;
 		this.modalLightBox.style.display = "flex";
 		this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + image + '" />';
+		// clic fleche gauche
 		this.modalLightBoxLeft.addEventListener("click", () => {
 			newIndex--;
 			if(newIndex === -1) {
-				newIndex = longueur;
+				newIndex = length;
 			}
 			arrayMedia.map(media => {
 				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />';
 			})
 		})
+		// clic fleche droite
 		this.modalLightBoxRight.addEventListener("click", () => {
 			newIndex++;
-			if(newIndex === longueur + 1) {
+			if(newIndex === length + 1) {
 				newIndex = index;
 			}
 			arrayMedia.map(media => {
