@@ -97,10 +97,9 @@ class ManagerPage {
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByTitle.style.fontWeight = "normal";
 			// trie et renvoie arrayMedia par dates croissantes
-			arrayMedia.sort(function (a, b) {
+			arrayMedia.sort((a, b) => {
  				return a.date.replace(/-/gi, "") - b.date.replace(/-/gi, "");
 			})
-			console.log(arrayMedia);
 			this.displayMedia();
 
 		})
@@ -113,8 +112,8 @@ class ManagerPage {
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByDate.style.fontWeight = "normal";
 			// trie et renvoie arrayMedia par ordre alphabétique des titres
-			arrayMedia.sort(function (a, b) {
- 				return a.image + b.image;
+			arrayMedia.sort((a, b) => {
+ 				return a.image - b.image;
 			})
 			console.log(arrayMedia);
 			this.displayMedia();
@@ -122,6 +121,7 @@ class ManagerPage {
 	}
 	displayMedia() {
 		// A factoriser
+		setTimeout(() => this.searchMediaForLightBox(), 100);
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
 				if(media.image) {
@@ -234,7 +234,6 @@ managerPage.displayPrice();
 managerPage.clickOnButtons();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
-setTimeout(() => managerPage.searchMediaForLightBox(), 100);
 
 
 
