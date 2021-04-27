@@ -133,6 +133,7 @@ class ManagerPage {
 					return newMedia.displayNewMedia();
 				}
 			});
+		this.clickOnHearth();
 	}
 	searchMediaForLightBox() {
 		for(const media of arrayMedia) {

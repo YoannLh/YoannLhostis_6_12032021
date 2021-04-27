@@ -67,6 +67,10 @@ header {
 			list-style-type: none;
 			color: $primary;
 		}
+		.nav__ul__li-toggle {
+			@extend .nav__ul__li;
+			display: none;
+		}
 	}
 }
 #main {
