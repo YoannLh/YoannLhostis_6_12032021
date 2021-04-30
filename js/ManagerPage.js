@@ -17,11 +17,13 @@ class ManagerPage {
 		this.media = [];
 		this.button = document.getElementById("button");
 		this.modal = document.getElementById("modal");
+		this.formModal = document.getElementById("formModal");
 		this.headerModalPhotographer = document.getElementById("headerModal__photographer");
 		this.firstname = document.getElementById("firstname");
 		this.lastname = document.getElementById("lastname");
 		this.email = document.getElementById("email");
 		this.message = document.getElementById("message");
+		this.buttonFormModal = document.getElementById("buttonFormModal");
 		this.closeModal = document.getElementById("closeModal");
 		this.modalLightBox = document.getElementById("modalLightBox");
 		this.closeModalLightBox = document.getElementById("closeModalLightBox");
@@ -122,6 +124,7 @@ class ManagerPage {
 	displayMedia() {
 		// A factoriser
 		setTimeout(() => this.searchMediaForLightBox(), 100);
+		setTimeout(() => this.clickOnHearth(), 100);
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
 				if(media.image) {
@@ -133,7 +136,6 @@ class ManagerPage {
 					return newMedia.displayNewMedia();
 				}
 			});
-		this.clickOnHearth();
 	}
 	searchMediaForLightBox() {
 		for(const media of arrayMedia) {
@@ -156,31 +158,52 @@ class ManagerPage {
 		let newIndex = index;
 		this.modalLightBox.style.display = "flex";
 		this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + image + '" />';
-		// clic fleche gauche
-		this.modalLightBoxLeft.addEventListener("click", () => {
+		let goPhotoLeft = () => {
 			newIndex--;
-			if(newIndex === -1) {
+			if(newIndex === - 1) {
 				newIndex = length;
 			}
 			arrayMedia.map(media => {
 				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />';
 			})
-		})
-		// clic fleche droite
-		this.modalLightBoxRight.addEventListener("click", () => {
+		}
+		let goPhotoRight = () => {
 			newIndex++;
 			if(newIndex === length + 1) {
-				newIndex = index;
+				newIndex = 0;
 			}
 			arrayMedia.map(media => {
 				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />';
 			})
+		}
+		// clic fleche gauche lightbox
+		this.modalLightBoxLeft.addEventListener("click", () => {
+			goPhotoLeft();
+		})
+		// clic fleche gauche clavier
+		document.addEventListener("keydown", () => { 
+			let nameKey = event.key;
+			if (nameKey == "ArrowLeft") {
+				goPhotoLeft();
+			}
+		})
+		// clic fleche droite lightbox
+		this.modalLightBoxRight.addEventListener("click", () => {
+			goPhotoRight();
+		})
+		// clic fleche droite clavier
+		document.addEventListener("keydown", () => { 
+			let nameKey = event.key;
+			if (nameKey == "ArrowRight") {
+				goPhotoRight();
+			}
 		})
 		this.closeModalLightBox.addEventListener("click", () => {
 			this.modalLightBox.style.display = "none";
 		})
 	}
 	clickOnHearth() {
+		console.log(arrayMedia);
 		let totalLikes = 0;
 		arrayMedia.map(media => {
 			totalLikes += media.likes;
@@ -197,7 +220,8 @@ class ManagerPage {
 				})
 			this.totalLikes.innerHTML = totalLikes + ' ' + '<i class="fas fa-heart"></i>';
 		})
-	}displayPrice() {
+	}
+	displayPrice() {
 		this.price.innerHTML = '' + this.photographer.price + '€ / jour';
 	}
 	clickOnButtons() {
@@ -212,16 +236,26 @@ class ManagerPage {
 	listeningInputs() {
 		this.firstname.addEventListener("input", () => {
 			console.log(event.target.value)
-		});
+		})
 		this.lastname.addEventListener("input", () => {
 			console.log(event.target.value)
-		});
+		})
 		this.email.addEventListener("input", () => {
 			console.log(event.target.value)
-		});
+		})
 		this.message.addEventListener("input", () => {
 			console.log(event.target.value)
-		});
+		})
+		this.buttonFormModal.addEventListener("click", (e) => {
+			e.preventDefault();
+			console.log("firstname : " + this.firstname.value + " " +
+						"lastname : " + this.lastname.value + " " +
+						"email : " + this.email.value + " " +
+						"message : " + this.message.value)
+		})
+		this.formModal.onsubmit = function(e) {
+			e.preventDefault();
+		}
 	}
 }
 
@@ -230,7 +264,6 @@ managerPage.getIdThenPhotographer();
 managerPage.askJsonForPhotosAndVideos();
 managerPage.displayPhotographer();
 managerPage.listeningSortBy();
-setTimeout(() => managerPage.clickOnHearth(), 300);
 managerPage.displayPrice();
 managerPage.clickOnButtons();
 managerPage.listeningInputs();

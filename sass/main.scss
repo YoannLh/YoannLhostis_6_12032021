@@ -70,6 +70,9 @@ header {
 		.nav__ul__li-toggle {
 			@extend .nav__ul__li;
 			display: none;
+			border: 0px solid rgb(212,212,212);
+			color: white;
+			background: $primary;
 		}
 	}
 }

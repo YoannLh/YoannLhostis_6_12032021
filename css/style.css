@@ -77,6 +77,9 @@ header .nav .nav__ul__li, header .nav .nav__ul__li-toggle {
 }
 header .nav .nav__ul__li-toggle {
   display: none;
+  border: 0px solid #d4d4d4;
+  color: white;
+  background: #901c1c;
 }
 
 #main {
