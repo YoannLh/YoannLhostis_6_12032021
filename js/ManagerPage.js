@@ -3,6 +3,8 @@ let arrayMedia = [];
 
 class ManagerPage {
 	constructor() {
+		this.body = document.getElementById("body");
+		this.bodyFilter = document.getElementById("bodyFilter");
 		this.mainInPage = document.getElementById("mainInPage");
 		this.sortBy = document.getElementById("sortBy");
 		this.sortByPopularity = document.getElementById("sortByPopularity");
@@ -103,7 +105,6 @@ class ManagerPage {
  				return a.date.replace(/-/gi, "") - b.date.replace(/-/gi, "");
 			})
 			this.displayMedia();
-
 		})
 		this.sortByTitle.addEventListener("click", () => {
 			console.log("title");
@@ -114,6 +115,28 @@ class ManagerPage {
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByDate.style.fontWeight = "normal";
 			// trie et renvoie arrayMedia par ordre alphabétique des titres
+
+
+			// for(const media of arrayMedia) {
+			// 	let allLetters = mediatags[0].split("");
+			// 	let newTag = media.tags[0].replace(/[a-z]/, allLetters[0].toUpperCase());
+			// 	const regex1 = new RegExp(newTag);
+			// 	console.log("regex1 : " + regex1);
+			// 	const regex2 = new RegExp(/\.jpg/);
+			// 	console.log("regex2 : " + regex2);
+			// 	const regex3 = new RegExp(/\.mp4/);
+			// 	console.log("regex3 : " + regex3);
+			// 	let newTitle = this.titleUpperCaseDone.split(regex1);
+			// 	console.log("newTitle : " + newTitle);
+			// 	const cleanFormatJpg = newTitle[1].split(regex2);
+			// 	console.log("splitted : " + cleanFormatJpg[0]);
+			// 	const cleanFormatMp4 = cleanFormatJpg[0].split(regex3);
+			// 	let cleanUnderscore = cleanFormatMp4[0].replace(/(_)/gi, " ");
+			// 	let cleanTiret = cleanUnderscore.replace(/-/gi, " ");
+			// 	console.log("cleanTiret : " + cleanTiret);
+			//}
+
+
 			arrayMedia.sort((a, b) => {
  				return a.image - b.image;
 			})
@@ -154,17 +177,25 @@ class ManagerPage {
 		}
 	}
 	displayModalLightBox(name, image, index) {
+		// ET SI VIDEOS ???
+		// ajouter controls pour les avoir seulement dans la lightbox
 		let length = arrayMedia.length - 1;
 		let newIndex = index;
+		this.body.ariaHidden = "false";
 		this.modalLightBox.style.display = "flex";
-		this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + image + '" />';
+		this.modalLightBox.ariaHidden = "true";
+		this.modalLightBoxContainerImg.innerHTML = '<div style="position: relative; display: flex; margin: auto; height: 100%;">' +
+														'<img src="../images/photos/' + name + '/' + image + '" />' +
+														'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + image + '</p>' + 
+													'</div>';
 		let goPhotoLeft = () => {
 			newIndex--;
 			if(newIndex === - 1) {
 				newIndex = length;
 			}
 			arrayMedia.map(media => {
-				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />';
+				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />' +
+															'<p>' + arrayMedia[newIndex].image + '</p>';
 			})
 		}
 		let goPhotoRight = () => {
@@ -173,7 +204,8 @@ class ManagerPage {
 				newIndex = 0;
 			}
 			arrayMedia.map(media => {
-				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />';
+				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />' + 
+															'<p>' + arrayMedia[newIndex].image + '</p>';
 			})
 		}
 		// clic fleche gauche lightbox
@@ -198,8 +230,19 @@ class ManagerPage {
 				goPhotoRight();
 			}
 		})
-		this.closeModalLightBox.addEventListener("click", () => {
+		let closeLightBox = () => {
 			this.modalLightBox.style.display = "none";
+			this.modalLightBox.ariaHidden = "false";
+			this.body.ariaHidden = "true";
+		}
+		this.closeModalLightBox.addEventListener("click", () => {
+			closeLightBox();
+		})
+		document.addEventListener("keydown", () => { 
+			let nameKey = event.key;
+			if (nameKey === "Escape") {
+				closeLightBox();
+			}
 		})
 	}
 	clickOnHearth() {
@@ -207,30 +250,45 @@ class ManagerPage {
 		let totalLikes = 0;
 		arrayMedia.map(media => {
 			totalLikes += media.likes;
-			//this.totalLikes.innerHTML = totalLikes;
 			document.getElementById("containerHearth" + media.id + "").addEventListener("click", () => {
 				document.getElementById("containerHearth" + media.id + "").innerHTML =  
 					'<div id="containerHearth' + media.id + '">' + 
 						(media.likes + 1) + 
-						'<i class="fas fa-heart" id="hearth' + media.id + '"></i>' +
+						'<i class="fas fa-heart" id="hearth' + media.id + '" aria-label="likes"></i>' +
 					'</div>';
 					media.likes++;
-					this.totalLikes.innerHTML = '' + (totalLikes + 1) + ' ' + '<i class="fas fa-heart"></i>';
+					this.totalLikes.innerHTML = '' + (totalLikes + 1) + ' ' + '<i class="fas fa-heart" aria-label="likes"></i>';
 					totalLikes++;
 				})
-			this.totalLikes.innerHTML = totalLikes + ' ' + '<i class="fas fa-heart"></i>';
+			this.totalLikes.innerHTML = totalLikes + ' ' + '<i class="fas fa-heart" aria-label="likes"></i>';
 		})
 	}
 	displayPrice() {
 		this.price.innerHTML = '' + this.photographer.price + '€ / jour';
 	}
-	clickOnButtons() {
+	clickOnButtonToOpenModal() {
 		this.button.addEventListener("click", () => {
+			this.bodyFilter.style.display = "block";
+			this.body.ariaHidden = "false";
 			this.modal.style.display = "block";
+			this.modal.ariaHidden = "true";
+			this.modal.style.zIndex = "7";
 			this.headerModalPhotographer.innerHTML = this.photographer.name;
 		})
-		this.closeModal.addEventListener("click", () => {
+		let closeModal = () => {
 			this.modal.style.display = "none";
+			this.modal.ariaHidden = "false";
+			this.body.ariaHidden = "true";
+			this.bodyFilter.style.display = "none";
+		}
+		this.closeModal.addEventListener("click", () => {
+			closeModal();
+		})
+		document.addEventListener("keydown", () => { 
+			let nameKey = event.key;
+			if (nameKey === "Escape") {
+				closeModal();
+			}
 		})
 	}
 	listeningInputs() {
@@ -265,7 +323,7 @@ managerPage.askJsonForPhotosAndVideos();
 managerPage.displayPhotographer();
 managerPage.listeningSortBy();
 managerPage.displayPrice();
-managerPage.clickOnButtons();
+managerPage.clickOnButtonToOpenModal();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
 

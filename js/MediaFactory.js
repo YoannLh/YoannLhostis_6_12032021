@@ -33,15 +33,16 @@ class MediaFactory {
 		let newTag = this.tags[0].replace(/[a-z]/, allLetters[0].toUpperCase());
 		const regex1 = new RegExp(newTag);
 		console.log("regex1 : " + regex1);
-		const regex2 = new RegExp(/^(-)+(_)+$/);
+		const regex2 = new RegExp(/\.jpg/);
 		console.log("regex2 : " + regex2);
-		const regex3 = new RegExp(/\.jpg/); // rajouter .mp4
+		const regex3 = new RegExp(/\.mp4/);
 		console.log("regex3 : " + regex3);
 		let newTitle = this.titleUpperCaseDone.split(regex1);
 		console.log("newTitle : " + newTitle);
-		const cleanFormat = newTitle[1].split(regex3);
-		console.log("splitted : " + cleanFormat[0]);
-		let cleanUnderscore = cleanFormat[0].replace(/(_)/gi, " ");
+		const cleanFormatJpg = newTitle[1].split(regex2);
+		console.log("splitted : " + cleanFormatJpg[0]);
+		const cleanFormatMp4 = cleanFormatJpg[0].split(regex3);
+		let cleanUnderscore = cleanFormatMp4[0].replace(/(_)/gi, " ");
 		let cleanTiret = cleanUnderscore.replace(/-/gi, " ");
 		console.log("cleanTiret : " + cleanTiret);
 		return cleanTiret;

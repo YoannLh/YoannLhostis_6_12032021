@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,16 +9,17 @@
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body id="body">
-		<header class="flex">
+		<div id="bodyFilter"></div>
+		<header class="flex" role="banner">
 			<a href="../index.html">
 				<img id="logo" src="../images/logo_fisheye.png" alt="logo-agence-fisheye">
 			</a>
 		</header>
-		<main id="mainInPage"></main>
+		<main id="mainInPage" role="main"></main>
 		<div id="containerSortBy">
 				<p style="font-weight: bold;">Trier par</p>
 				<div id="sortBy" class="flex">
-					<div id="sortByPopularity" class="flex">
+					<div id="sortByPopularity" class="flex"  role="navigation" aria-expanded="false">
 						<p>Popularité</p>
 					</div>
 					<div id="sortByDate" class="flex">
@@ -36,27 +37,27 @@
 			<div id="likes"></div>
 		</div>
 		<div id="button" class="flex">Contactez-moi</div>
-		<div id="modal" class="flex">
+		<div id="modal" class="flex" aria-describedby="modalTitle">
 			<div id="headerModal" class="flex">
-				<p>Contactez-moi</p>
+				<h2 id="modalTitle">Contactez-moi</h2>
 				<div id="closeModal">
-					<i class="fas fa-times"></i>
+					<i class="fas fa-times" aria-label="close-modal"></i>
 				</div>
 			</div>
 			<p id="headerModal__photographer"></p>
 			<form id="formModal" action="" method="post">
-				<label for="">Prénom</label>
+				<label for="firstname">Prénom</label>
 				<input type="text" id="firstname">
-				<label for="">Nom</label>
+				<label for="lastname">Nom</label>
 				<input type="text" id="lastname">
-				<label for="">Email</label>
+				<label for="email">Email</label>
 				<input type="email" id="email">
 				<label>Votre message</label>
 				<input type="text" id="message">
 				<button id="buttonFormModal" type="submit" class="flex">Envoyer</button>
 			</form>
 		</div>
-		<div id="modalLightBox">
+		<div id="modalLightBox" role="dialog">
 			<div id="closeModalLightBox">
 				<i class="fas fa-times"></i>
 			</div>
@@ -64,7 +65,7 @@
 				<i class="fas fa-chevron-left"></i>
 			</div>
 			<div id="modalLightBox-containerImg" class="flex">
-				<div id="modalLightBox-containerImg__img">img</div>
+				<div id="modalLightBox-containerImg__img"></div>
 			</div>
 			<div id="modalLightBoxRight">
 				<i class="fas fa-chevron-right"></i>
@@ -74,7 +75,7 @@
 			<div id="totalLikes"></div>
 			<div id="price"></div>
 		</div>
-		<footer class="flex">
+		<footer class="flex" role="contentinfo">
 			<!-- <p>* FishEye Agency *</p> -->	
 		</footer>
 		<script src="../js/MediaFactory.js"></script>

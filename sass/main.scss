@@ -18,6 +18,15 @@ p {
 $primary: rgba(144,28,28,1);
 $secondary: rgba(211,87,60,1);
 
+#bodyFilter {
+	position: absolute;
+	display: none;
+	height: 100%;
+	width: 100%;
+	background: white;
+	opacity: 0.9;
+	z-index: 2;
+}
 header {
 	position: relative;
 	padding: 40px 25px;
@@ -233,19 +242,19 @@ header {
 		&:hover {
 			border: 0 solid black;
 			border-radius: 4px 4px 0 0;
-			background: rgba(144,28,28,1);
+			background: $primary;
 			#sortByPopularity {
-				background: rgba(144,28,28,1);
+				background: $primary;
 				color: white;
 			}
 			#sortByDate {
 				transform: translateY(100%);
-				background: rgba(144,28,28,1);
+				background: $primary;
 				color: white;
 			}
 			#sortByTitle {
 				transform: translateY(200%);
-				background: rgba(144,28,28,1);
+				background: $primary;
 				border-radius: 0 0 4px 4px;
 				color: white;
 			}
@@ -260,7 +269,7 @@ header {
 			height: 40px;
 			margin-left: 4%;
 			background: white;
-			z-index: 4;
+			z-index: 5;
 			p {
 				margin: auto;
 			}
@@ -273,7 +282,7 @@ header {
 			height: 40px;
 			align-items: center;
 			background: white;
-			z-index: 3;
+			z-index: 4;
 			transform: translateY(0);
 			transition: transform 300ms;
 		}
@@ -285,7 +294,7 @@ header {
 			height: 40px;
 			align-items: center;
 			background: white;
-			z-index: 3;
+			z-index: 4;
 			transform: translateY(0);
 			transition: transform 300ms;
 		}
@@ -308,7 +317,7 @@ header {
 		.fa-chevron-up {
 			position: absolute;
 			right: 8%;
-			z-index: 5;
+			z-index: 6;
 			transform: rotate(0);
 		}
 	}

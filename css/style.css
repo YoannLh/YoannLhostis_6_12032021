@@ -19,6 +19,16 @@ p {
   margin: 5px;
 }
 
+#bodyFilter {
+  position: absolute;
+  display: none;
+  height: 100%;
+  width: 100%;
+  background: white;
+  opacity: 0.9;
+  z-index: 2;
+}
+
 header {
   position: relative;
   padding: 40px 25px;
@@ -281,7 +291,7 @@ header .nav .nav__ul__li-toggle {
   height: 40px;
   margin-left: 4%;
   background: white;
-  z-index: 4;
+  z-index: 5;
 }
 #containerSortBy #sortBy #sortByPopularity p {
   margin: auto;
@@ -294,7 +304,7 @@ header .nav .nav__ul__li-toggle {
   height: 40px;
   align-items: center;
   background: white;
-  z-index: 3;
+  z-index: 4;
   transform: translateY(0);
   transition: transform 300ms;
 }
@@ -306,7 +316,7 @@ header .nav .nav__ul__li-toggle {
   height: 40px;
   align-items: center;
   background: white;
-  z-index: 3;
+  z-index: 4;
   transform: translateY(0);
   transition: transform 300ms;
 }
@@ -329,7 +339,7 @@ header .nav .nav__ul__li-toggle {
 #containerSortBy #sortBy .fa-chevron-up {
   position: absolute;
   right: 8%;
-  z-index: 5;
+  z-index: 6;
   transform: rotate(0);
 }
 
