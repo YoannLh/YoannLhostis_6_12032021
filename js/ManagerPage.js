@@ -1,3 +1,4 @@
+//import titleCleaner from '../js/TitleCleaner.js';
 
 let arrayMedia = [];
 
@@ -326,6 +327,8 @@ managerPage.displayPrice();
 managerPage.clickOnButtonToOpenModal();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
+
+//console.log(titleCleaner.replaceUnderscoresAndDashesWithSpaces());
 
 
 

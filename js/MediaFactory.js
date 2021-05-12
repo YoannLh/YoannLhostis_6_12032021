@@ -12,40 +12,46 @@ class MediaFactory {
 		this.titleUpperCaseDone;
 		this.cleanedTitle;
 	}
-	titleToUpperCase() {
-		let allLetters = this.media.split("");
-		console.log("firstletter title : " + allLetters);
-		this.titleUpperCaseDone = this.media.replace(/[a-z]?[A-Z]?/, allLetters[0].toUpperCase());
-		console.log("newTitle : " + this.titleUpperCaseDone);
-	}
-	cleanTags() {
-		if(this.tags[0] == "portait") {
-			this.tags[0] = "portrait";
-		}
-		if(this.tags[0] == "events") {
-			this.tags[0] = "event";
-		}
-	}
+	// titleToUpperCase() {
+	// 	let allLetters = this.media.split("");
+	// 	console.log("firstletter title : " + allLetters);
+	// 	this.titleUpperCaseDone = this.media.replace(/[a-z]?[A-Z]?/, allLetters[0].toUpperCase());
+	// 	console.log("newTitle : " + this.titleUpperCaseDone);
+	// 	const titleCleaner = new TitleCleaner();
+	// 	console.log(titleCleaner.returnCleanedTitle());
+	// }
+	// cleanTags() {
+	// 	if(this.tags[0] == "portait") {
+	// 		this.tags[0] = "portrait";
+	// 	}
+	// 	if(this.tags[0] == "events") {
+	// 		this.tags[0] = "event";
+	// 	}
+	// }
 	cleanTitles() {
-		this.titleToUpperCase();
-		this.cleanTags();
-		let allLetters = this.tags[0].split("");
-		let newTag = this.tags[0].replace(/[a-z]/, allLetters[0].toUpperCase());
-		const regex1 = new RegExp(newTag);
-		console.log("regex1 : " + regex1);
-		const regex2 = new RegExp(/\.jpg/);
-		console.log("regex2 : " + regex2);
-		const regex3 = new RegExp(/\.mp4/);
-		console.log("regex3 : " + regex3);
-		let newTitle = this.titleUpperCaseDone.split(regex1);
-		console.log("newTitle : " + newTitle);
-		const cleanFormatJpg = newTitle[1].split(regex2);
-		console.log("splitted : " + cleanFormatJpg[0]);
-		const cleanFormatMp4 = cleanFormatJpg[0].split(regex3);
-		let cleanUnderscore = cleanFormatMp4[0].replace(/(_)/gi, " ");
-		let cleanTiret = cleanUnderscore.replace(/-/gi, " ");
-		console.log("cleanTiret : " + cleanTiret);
-		return cleanTiret;
+		// this.titleToUpperCase();
+		// this.cleanTags();
+		// let allLetters = this.tags[0].split("");
+		// let newTag = this.tags[0].replace(/[a-z]/, allLetters[0].toUpperCase());
+		// const regex1 = new RegExp(newTag);
+		// console.log("regex1 : " + regex1);
+		// const regex2 = new RegExp(/\.jpg/);
+		// console.log("regex2 : " + regex2);
+		// const regex3 = new RegExp(/\.mp4/);
+		// console.log("regex3 : " + regex3);
+		// let newTitle = this.titleUpperCaseDone.split(regex1);
+		// console.log("newTitle : " + newTitle);
+		// const cleanFormatJpg = newTitle[1].split(regex2);
+		// console.log("splitted : " + cleanFormatJpg[0]);
+		// const cleanFormatMp4 = cleanFormatJpg[0].split(regex3);
+		// let cleanUnderscore = cleanFormatMp4[0].replace(/(_)/gi, " ");
+		// let cleanTiret = cleanUnderscore.replace(/-/gi, " ");
+		// console.log("cleanTiret : " + cleanTiret);
+		// return cleanTiret;
+
+		const titleCleaner = new TitleCleaner(this.media, this.tags);
+		titleCleaner.titleToUpperCase();
+		return titleCleaner.returnCleanedTitle();
 	}
 	makeMiniatureIfVideoIfNotReturnImage() {
 		if(this.type == "vidéo") {
@@ -70,6 +76,9 @@ class MediaFactory {
 		)
 	}
 }
+
+
+
 
 
 
