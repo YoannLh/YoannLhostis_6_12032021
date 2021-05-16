@@ -1,4 +1,3 @@
-//import titleCleaner from '../js/TitleCleaner.js';
 
 let arrayMedia = [];
 
@@ -33,6 +32,7 @@ class ManagerPage {
 		this.modalLightBoxLeft = document.getElementById("modalLightBoxLeft");
 		this.modalLightBoxContainerImg = document.getElementById("modalLightBox-containerImg");
 		this.modalLightBoxRight = document.getElementById("modalLightBoxRight");
+		this.ariaVisibility = false;
 	}
 	getIdThenPhotographer() {
 		let params = new URLSearchParams(document.location.search.substring(1));
@@ -68,7 +68,7 @@ class ManagerPage {
 		return this.mainInPage.innerHTML =
 			'<section class="mainInPage__photographer">' + 
 				'<div class="mainInPage__photographer__photo flex">' + 
-					'<img src="../images/photos/' + this.photographer.name + '/' + this.photographer.portrait + '" />' + 
+					'<img src="../images/portraits/' + this.photographer.portrait + '" />' + 
 				'</div>' + 
 				'<div class="mainInPage__photographer__description">' + 
 					'<div class="mainInPage__photographer__description__name"><p>' + this.photographer.name + '</p></div>' +
@@ -116,32 +116,40 @@ class ManagerPage {
 			this.sortByPopularity.style.fontWeight = "normal";
 			this.sortByDate.style.fontWeight = "normal";
 			// trie et renvoie arrayMedia par ordre alphabétique des titres
-
-
-			// for(const media of arrayMedia) {
-			// 	let allLetters = mediatags[0].split("");
-			// 	let newTag = media.tags[0].replace(/[a-z]/, allLetters[0].toUpperCase());
-			// 	const regex1 = new RegExp(newTag);
-			// 	console.log("regex1 : " + regex1);
-			// 	const regex2 = new RegExp(/\.jpg/);
-			// 	console.log("regex2 : " + regex2);
-			// 	const regex3 = new RegExp(/\.mp4/);
-			// 	console.log("regex3 : " + regex3);
-			// 	let newTitle = this.titleUpperCaseDone.split(regex1);
-			// 	console.log("newTitle : " + newTitle);
-			// 	const cleanFormatJpg = newTitle[1].split(regex2);
-			// 	console.log("splitted : " + cleanFormatJpg[0]);
-			// 	const cleanFormatMp4 = cleanFormatJpg[0].split(regex3);
-			// 	let cleanUnderscore = cleanFormatMp4[0].replace(/(_)/gi, " ");
-			// 	let cleanTiret = cleanUnderscore.replace(/-/gi, " ");
-			// 	console.log("cleanTiret : " + cleanTiret);
-			//}
-
-
-			arrayMedia.sort((a, b) => {
- 				return a.image - b.image;
-			})
-			console.log(arrayMedia);
+			const titles = [];
+			for(const media of arrayMedia) {
+				if(media.image) {
+					const titleCleaner = new TitleCleaner(media.image, media.tags);
+					titleCleaner.titleToUpperCase();
+					const obj = {date: media.date, id: media.id, likes: media.likes, price: media.price, tags: media.tags, image: titleCleaner.returnCleanedTitle()};
+					titles.push(obj);
+				}
+				if(media.video) {
+					const titleCleaner = new TitleCleaner(media.video, media.tags);
+					titleCleaner.titleToUpperCase();
+					const obj = {date: media.date, id: media.id, likes: media.likes, price: media.price, tags: media.tags, video: titleCleaner.returnCleanedTitle()};
+					titles.push(obj);
+				}
+			}
+			function compare( a, b ) {
+  				if(a.image < b.image || a.video < b.video) {
+    				return -1;
+  				}
+  				if(a.image  > b.image || a.video > b.video) {
+    				return 1;
+  				}
+  				return 0;
+			}
+			titles.sort(compare);
+			for(const media of arrayMedia) {
+				for(const title of titles) {
+					if(media.id == title.id) {
+						title.image = media.image;
+						title.video = media.video;
+					}
+				}
+			}
+			arrayMedia = titles;
 			this.displayMedia();
 		})
 	}
@@ -151,6 +159,7 @@ class ManagerPage {
 		setTimeout(() => this.clickOnHearth(), 100);
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
+				console.log(media);
 				if(media.image) {
 					const newMedia = new MediaFactory(this.photographer.name, "image", media.date, media.id, media.likes, media.price, media.tags, media.image);
 					return newMedia.displayNewMedia();
@@ -159,6 +168,7 @@ class ManagerPage {
 					const newMedia = new MediaFactory(this.photographer.name, "vidéo", media.date, media.id, media.likes, media.price, media.tags, media.video);
 					return newMedia.displayNewMedia();
 				}
+				console.log(arrayMedia);
 			});
 	}
 	searchMediaForLightBox() {
@@ -182,6 +192,7 @@ class ManagerPage {
 		// ajouter controls pour les avoir seulement dans la lightbox
 		let length = arrayMedia.length - 1;
 		let newIndex = index;
+		let ariaVisibility = true;
 		this.body.ariaHidden = "false";
 		this.modalLightBox.style.display = "flex";
 		this.modalLightBox.ariaHidden = "true";
@@ -247,7 +258,6 @@ class ManagerPage {
 		})
 	}
 	clickOnHearth() {
-		console.log(arrayMedia);
 		let totalLikes = 0;
 		arrayMedia.map(media => {
 			totalLikes += media.likes;
@@ -328,7 +338,7 @@ managerPage.clickOnButtonToOpenModal();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
 
-//console.log(titleCleaner.replaceUnderscoresAndDashesWithSpaces());
+
 
 
 

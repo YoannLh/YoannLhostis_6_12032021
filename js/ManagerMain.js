@@ -8,11 +8,10 @@ class ManagerMain {
 		this.taggedArtists = [];
 	}
 	displayPhotographersInMainPage() {
-		console.log("data : " + this.data);
 		return this.main.innerHTML =
 			this.data.map(artist => {
+				console.log(artist);
 				sessionStorage.setItem("photographer" + artist.id + "", JSON.stringify(artist));
-
 				function displayTags() {
 					return artist.tags.map(tag => {
 						return '<li class="main__photographer__container__tags">#' + tag + '</li>';
@@ -22,7 +21,7 @@ class ManagerMain {
 					'<a href="./pages/photographer.html?id=' + artist.id + '">' +
 						'<section class="main__photographer">' +
 							'<div class="main__photographer__photo flex">' + 
-								'<img src="./images/photos/' + artist.name + '/' + artist.portrait + '" alt="portrait de ' + artist.name + '"/>' + 
+								'<img src="./images/portraits/' + artist.portrait + '" alt="portrait de ' + artist.name + '"/>' + 
 							'</div>' + 
 							'<div class="main__photographer__description">' + 
 								'<div class="main__photographer__description__name"><p>' + artist.name + '</p></div>' +
