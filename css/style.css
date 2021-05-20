@@ -19,6 +19,12 @@ p {
   margin: 5px;
 }
 
+h1, h2 {
+  font-size: 1em;
+  font-weight: normal;
+  margin: 5px;
+}
+
 #bodyFilter {
   position: absolute;
   display: none;
@@ -182,6 +188,7 @@ header .nav .nav__ul__li-toggle {
 #mainInPage .mainInPage__photographer {
   height: 125px;
   flex-direction: column;
+  border-radius: 5px;
 }
 @media screen and (min-width: 1024px) {
   #mainInPage .mainInPage__photographer {

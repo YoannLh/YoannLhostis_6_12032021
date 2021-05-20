@@ -34,8 +34,8 @@ class TitleCleaner {
 		this.getNumbers();
 	}
 	getNumbers() {
-		//this.regex4 = new RegExp(/[0-9]/);
-		this.regex4 = new RegExp(/ /);
+		this.regex4 = new RegExp(/[0-9]/);
+		//this.regex4 = new RegExp(/ /);
 	}
 	returnCleanedTitle() {
 		//appelée dans MediaFactory.js (l.54)
@@ -44,7 +44,7 @@ class TitleCleaner {
 		let noMP4 = noJPG[0].split(this.regex3);
 		let noNumbers = noMP4[0].split(this.regex4);
 		console.log(noNumbers);
-		let noUnderscore = noNumbers[0].replace(/_/gi, " ");
+		let noUnderscore = noMP4[0].replace(/_/gi, " ");
 		console.log(noUnderscore);
 		let noComma = noUnderscore.replace(/-/gi, " ");
 		console.log(noComma);

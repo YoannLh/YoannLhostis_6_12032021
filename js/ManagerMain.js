@@ -24,7 +24,7 @@ class ManagerMain {
 								'<img src="./images/portraits/' + artist.portrait + '" alt="portrait de ' + artist.name + '"/>' + 
 							'</div>' + 
 							'<div class="main__photographer__description">' + 
-								'<div class="main__photographer__description__name"><p>' + artist.name + '</p></div>' +
+								'<div class="main__photographer__description__name"><h2>' + artist.name + '</h2></div>' +
 								'<div class="main__photographer__description__city"><p>' + artist.city + ", " + artist.country + '</p></div>' +
 								'<div class="main__photographer__description__tagline"><p>' + artist.tagline + '</p></div>' +
 								'<div class="main__photographer__description__price"><p>' + artist.price + "€/jour" + '</p></div>' +

@@ -51,14 +51,22 @@ class MediaFactory {
 
 		const titleCleaner = new TitleCleaner(this.media, this.tags);
 		titleCleaner.titleToUpperCase();
+		this.addAlt();
 		return titleCleaner.returnCleanedTitle();
+	}
+	addAlt() {
+		for(const alt of alts) {
+			if(this.id == alt.id) {
+				return alt.alt;
+			}
+		}	
 	}
 	makeMiniatureIfVideoIfNotReturnImage() {
 		if(this.type == "vidéo") {
-			return '<video id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" type="video/mp4">' + this.media + '</video>';
+			return '<video id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" type="video/mp4" controls alt=' + this.addAlt() + '>' + this.media + '</video>';
 		}
 		if(this.type == "image") {
-			return '<img id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" />';
+			return '<img id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" alt=' + this.addAlt() + ' />';
 		}
 	}
 	displayNewMedia() {

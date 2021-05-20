@@ -1,5 +1,5 @@
 
-let arrayMedia = [];
+const arrayMedia = [];
 
 class ManagerPage {
 	constructor() {
@@ -68,10 +68,10 @@ class ManagerPage {
 		return this.mainInPage.innerHTML =
 			'<section class="mainInPage__photographer">' + 
 				'<div class="mainInPage__photographer__photo flex">' + 
-					'<img src="../images/portraits/' + this.photographer.portrait + '" />' + 
+					'<img src="../images/portraits/' + this.photographer.portrait + '" alt="portait_of_'+ this.photographer + '"/>' + 
 				'</div>' + 
 				'<div class="mainInPage__photographer__description">' + 
-					'<div class="mainInPage__photographer__description__name"><p>' + this.photographer.name + '</p></div>' +
+					'<div class="mainInPage__photographer__description__name"><h1>' + this.photographer.name + '</h1></div>' +
 					'<div class="mainInPage__photographer__description__city"><p>' + this.photographer.city + ", " + this.photographer.country + '</p></div>' +
 					'<div class="mainInPage__photographer__description__tagline"><p>' + this.photographer.tagline + '</p></div>' +
 					'<div class="flex">' + this.displayTags() + '</div>' + 
@@ -91,6 +91,7 @@ class ManagerPage {
 			arrayMedia.sort((a, b) => {
  				return b.likes - a.likes;
 			})
+			console.log("popularity : " + arrayMedia);
 			this.displayMedia();
 		})
 		this.sortByDate.addEventListener("click", () => {
@@ -131,11 +132,11 @@ class ManagerPage {
 					titles.push(obj);
 				}
 			}
-			function compare( a, b ) {
-  				if(a.image < b.image || a.video < b.video) {
+			function compare(a, b) { 
+  				if(a.image < b.image || a.image < b.video || a.video < b.image || a.video < b.video) {
     				return -1;
   				}
-  				if(a.image  > b.image || a.video > b.video) {
+  				if(a.image  > b.image || a.image > b.video || a.video > b.image || a.video > b.video) {
     				return 1;
   				}
   				return 0;
@@ -144,13 +145,14 @@ class ManagerPage {
 			for(const media of arrayMedia) {
 				for(const title of titles) {
 					if(media.id == title.id) {
-						title.image = media.image;
 						title.video = media.video;
+						title.image = media.image;	
 					}
 				}
 			}
 			arrayMedia = titles;
-			this.displayMedia();
+			console.log("titles : " + arrayMedia)
+			setTimeout(() => this.displayMedia(), 100);
 		})
 	}
 	displayMedia() {

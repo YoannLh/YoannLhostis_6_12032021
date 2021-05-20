@@ -14,7 +14,11 @@ a {
 p {
 	margin: 5px;
 }
-
+h1, h2 {
+  font-size: 1em;
+  font-weight: normal;
+  margin: 5px;
+}
 $primary: rgba(144,28,28,1);
 $secondary: rgba(211,87,60,1);
 
@@ -170,6 +174,7 @@ header {
 	.mainInPage__photographer {
 		height: 125px;
 		flex-direction: column;
+		border-radius: 5px;
 		@media screen and (min-width: 1024px) {
 			height: auto;
 			padding: 30px;
