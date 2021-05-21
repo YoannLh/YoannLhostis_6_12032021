@@ -5,6 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.21.1",
+    "fs": "0.0.1-security",
+    "npm": "^7.14.0",
     "sass": "^1.32.8"
   },
   "devDependencies": {},

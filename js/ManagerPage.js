@@ -1,5 +1,5 @@
 
-const arrayMedia = [];
+let arrayMedia = [];
 
 class ManagerPage {
 	constructor() {
@@ -55,7 +55,7 @@ class ManagerPage {
 			console.log(arrayMedia);
 			}
 		}
-		request.open("GET", "../data/data.json");
+		request.open("GET", "../data/dataWithAlts.json");
         request.send();
 	}
 	displayTags() {
@@ -77,6 +77,9 @@ class ManagerPage {
 					'<div class="flex">' + this.displayTags() + '</div>' + 
 				'</div>' + 
 			'</section>'
+	}
+	writeInJSON() {
+
 	}	
 	listeningSortBy() {
 		this.sortByPopularity.addEventListener("click", () => {
@@ -156,60 +159,73 @@ class ManagerPage {
 		})
 	}
 	displayMedia() {
-		// A factoriser
 		setTimeout(() => this.searchMediaForLightBox(), 100);
 		setTimeout(() => this.clickOnHearth(), 100);
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
 				console.log(media);
 				if(media.image) {
-					const newMedia = new MediaFactory(this.photographer.name, "image", media.date, media.id, media.likes, media.price, media.tags, media.image);
+					const newMedia = new MediaFactory(this.photographer.name, "image", media.date, media.id, media.likes, media.price, media.tags, media.image, media.alt);
 					return newMedia.displayNewMedia();
 				}
 				if(media.video) {
-					const newMedia = new MediaFactory(this.photographer.name, "vidéo", media.date, media.id, media.likes, media.price, media.tags, media.video);
+					const newMedia = new MediaFactory(this.photographer.name, "vidéo", media.date, media.id, media.likes, media.price, media.tags, media.video, media.alt);
 					return newMedia.displayNewMedia();
 				}
 				console.log(arrayMedia);
 			});
 	}
 	searchMediaForLightBox() {
+		// travailler plutot avec mediaFactory ici ??? probleme avec les videos a afficher dans lightbox,
+		// balise video à generer
 		for(const media of arrayMedia) {
 			if(media.image) {
 				document.getElementById(media.id).addEventListener("click", () => {
 					// Ces id ont été créés dans makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<img id=this.id...)	
-					this.displayModalLightBox(this.photographer.name, media.image, arrayMedia.indexOf(media));
+					this.displayModalLightBox(this.photographer.name, media.image, media.tags, arrayMedia.indexOf(media));
 				})
 			}
 			if(media.video) {
 				document.getElementById(media.id).addEventListener("click", () => {
 					// Ces id ont été créés dans makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<img id=this.id...)	
-					this.displayModalLightBox(this.photographer.name, media.video, arrayMedia.indexOf(media));
+					this.displayModalLightBox(this.photographer.name, media.video, media.tags, arrayMedia.indexOf(media));
+					console.log(media.video);
 				})
 			}	
 		}
 	}
-	displayModalLightBox(name, image, index) {
+	displayModalLightBox(name, image, tags, index) {
 		// ET SI VIDEOS ???
 		// ajouter controls pour les avoir seulement dans la lightbox
+		console.log("lightbox image : " + image);
+		console.log("lightbox tags : " + tags);
+		const titleCleaner = new TitleCleaner(image, tags);
+		titleCleaner.titleToUpperCase();
+		console.log(titleCleaner.returnCleanedTitle());
 		let length = arrayMedia.length - 1;
 		let newIndex = index;
 		let ariaVisibility = true;
 		this.body.ariaHidden = "false";
-		this.modalLightBox.style.display = "flex";
 		this.modalLightBox.ariaHidden = "true";
-		this.modalLightBoxContainerImg.innerHTML = '<div style="position: relative; display: flex; margin: auto; height: 100%;">' +
-														'<img src="../images/photos/' + name + '/' + image + '" />' +
-														'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + image + '</p>' + 
-													'</div>';
+		this.modalLightBox.style.display = "flex";
+		this.modalLightBoxContainerImg.innerHTML = 
+			'<div style="position: relative; display: flex; margin: auto; height: 100%;">' +
+				'<img src="../images/photos/' + name + '/' + image + '" />' +
+				'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + titleCleaner.returnCleanedTitle() + '</p>' + 
+			'</div>'; 
 		let goPhotoLeft = () => {
 			newIndex--;
 			if(newIndex === - 1) {
 				newIndex = length;
 			}
+			const titleCleaner = new TitleCleaner(arrayMedia[newIndex].image, arrayMedia[newIndex].tags);
+			titleCleaner.titleToUpperCase();
 			arrayMedia.map(media => {
-				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />' +
-															'<p>' + arrayMedia[newIndex].image + '</p>';
+				this.modalLightBoxContainerImg.innerHTML = 
+					'<div style="position: relative; display: flex; margin: auto; height: 100%;">' +
+						'<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />' +
+						'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + titleCleaner.returnCleanedTitle() + '</p>' + 
+					'</div>';
 			})
 		}
 		let goPhotoRight = () => {
@@ -217,9 +233,14 @@ class ManagerPage {
 			if(newIndex === length + 1) {
 				newIndex = 0;
 			}
+			const titleCleaner = new TitleCleaner(arrayMedia[newIndex].image, arrayMedia[newIndex].tags);
+			titleCleaner.titleToUpperCase();
 			arrayMedia.map(media => {
-				this.modalLightBoxContainerImg.innerHTML = '<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />' + 
-															'<p>' + arrayMedia[newIndex].image + '</p>';
+				this.modalLightBoxContainerImg.innerHTML = 
+					'<div style="position: relative; display: flex; margin: auto; height: 100%;">' +
+						'<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />' +
+						'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + titleCleaner.returnCleanedTitle() + '</p>' + 
+					'</div>';
 			})
 		}
 		// clic fleche gauche lightbox
@@ -339,6 +360,9 @@ managerPage.displayPrice();
 managerPage.clickOnButtonToOpenModal();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
+
+
+setTimeout(() => managerPage.writeInJSON(), 100);
 
 
 
