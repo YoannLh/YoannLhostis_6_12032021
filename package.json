@@ -5,11 +5,19 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.21.1",
+    "babel": "^6.23.0",
+    "file-system": "^2.2.2",
     "fs": "0.0.1-security",
+    "js": "^0.1.0",
     "npm": "^7.14.0",
+    "require": "^2.4.20",
+    "requirejs": "^2.3.6",
     "sass": "^1.32.8"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0"
+  },
   "scripts": {
     "sass": "sass --watch ./sass/main.scss:./css/style.css"
   },

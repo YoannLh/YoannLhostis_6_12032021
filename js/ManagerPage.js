@@ -1,6 +1,12 @@
 
 let arrayMedia = [];
 
+const newData = [];
+
+const fs = require('fs');
+
+console.log("FS : " + fs);
+
 class ManagerPage {
 	constructor() {
 		this.body = document.getElementById("body");
@@ -46,13 +52,45 @@ class ManagerPage {
   		request.onreadystatechange = function() {
   			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                 this.data = JSON.parse(this.response);
-                console.log(id);
 				for(const media of this.data.media) {
+					for(const alt of alts) {
+						if(media.id == alt.id) {
+							// crée new JSON avec Alts
+							if(media.image) {
+								newData.push(
+									{
+										"date": media.date,
+										"id": media.id,
+										"image": media.image,
+										"alt": alt.alt,
+										"likes": media.likes,
+										"photographerId": media.id,
+										"price": media.price,
+										"tags": media.tags
+									}
+								)
+							}
+							if(media.video) {
+								newData.push(
+									{
+										"date": media.date,
+										"id": media.id,
+										"video": media.video,
+										"alt": alt.alt,
+										"likes": media.likes,
+										"photographerId": media.id,
+										"price": media.price,
+										"tags": media.tags
+									}
+								)
+							}
+						console.log(newData);
+						}
+					}
 					if(id == media.photographerId) {
 						arrayMedia.push(media);
 					}
 				}
-			console.log(arrayMedia);
 			}
 		}
 		request.open("GET", "../data/dataWithAlts.json");
@@ -78,9 +116,6 @@ class ManagerPage {
 				'</div>' + 
 			'</section>'
 	}
-	writeInJSON() {
-
-	}	
 	listeningSortBy() {
 		this.sortByPopularity.addEventListener("click", () => {
 			console.log("popularity");
@@ -354,6 +389,7 @@ class ManagerPage {
 const managerPage = new ManagerPage();
 managerPage.getIdThenPhotographer();
 managerPage.askJsonForPhotosAndVideos();
+setTimeout(() => managerPage.createNewJSON(), 100);
 managerPage.displayPhotographer();
 managerPage.listeningSortBy();
 managerPage.displayPrice();
@@ -361,8 +397,6 @@ managerPage.clickOnButtonToOpenModal();
 managerPage.listeningInputs();
 setTimeout(() => managerPage.displayMedia(), 100);
 
-
-setTimeout(() => managerPage.writeInJSON(), 100);
 
 
 
