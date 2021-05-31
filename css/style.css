@@ -272,6 +272,9 @@ header .nav .nav__ul__li-toggle {
     padding: 0 80px;
     align-items: center;
   }
+  #containerSortBy p {
+    font-weight: bold;
+  }
 }
 #containerSortBy #sortBy {
   position: absolute;

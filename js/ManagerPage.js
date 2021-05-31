@@ -1,4 +1,3 @@
-
 let arrayMedia = [];
 
 const newData = [];
