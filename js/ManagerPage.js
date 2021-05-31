@@ -3,10 +3,6 @@ let arrayMedia = [];
 
 const newData = [];
 
-const fs = require('fs');
-
-console.log("FS : " + fs);
-
 class ManagerPage {
 	constructor() {
 		this.body = document.getElementById("body");
@@ -44,7 +40,6 @@ class ManagerPage {
 		let params = new URLSearchParams(document.location.search.substring(1));
 		this.id = params.get("id");
 		this.photographer = JSON.parse(sessionStorage.getItem("photographer" + this.id + ""));
-		console.log(this.photographer);
 	}
 	askJsonForPhotosAndVideos() {
 		let id = this.id;
@@ -55,7 +50,6 @@ class ManagerPage {
 				for(const media of this.data.media) {
 					for(const alt of alts) {
 						if(media.id == alt.id) {
-							// crée new JSON avec Alts
 							if(media.image) {
 								newData.push(
 									{
@@ -84,7 +78,6 @@ class ManagerPage {
 									}
 								)
 							}
-						console.log(newData);
 						}
 					}
 					if(id == media.photographerId) {
@@ -98,9 +91,8 @@ class ManagerPage {
 	}
 	displayTags() {
 		return this.photographer.tags.map(tag => {
-			console.log("tag : " + this.photographer.tags);
 			return '<div class="mainInPage__photographer__tags">' + "#" + tag + '</div>';
-		})
+		}).join('');
 	}
 	displayPhotographer() {
 		return this.mainInPage.innerHTML =
@@ -118,7 +110,6 @@ class ManagerPage {
 	}
 	listeningSortBy() {
 		this.sortByPopularity.addEventListener("click", () => {
-			console.log("popularity");
 			this.sortByPopularity.style.zIndex = "4";
 			this.sortByDate.style.zIndex = "3";
 			this.sortByTitle.style.zIndex = "3";
@@ -129,11 +120,9 @@ class ManagerPage {
 			arrayMedia.sort((a, b) => {
  				return b.likes - a.likes;
 			})
-			console.log("popularity : " + arrayMedia);
 			this.displayMedia();
 		})
 		this.sortByDate.addEventListener("click", () => {
-			console.log("date");	
 			this.sortByPopularity.style.zIndex = "3";
 			this.sortByDate.style.zIndex = "4";
 			this.sortByTitle.style.zIndex = "3";
@@ -147,7 +136,6 @@ class ManagerPage {
 			this.displayMedia();
 		})
 		this.sortByTitle.addEventListener("click", () => {
-			console.log("title");
 			this.sortByPopularity.style.zIndex = "3";
 			this.sortByDate.style.zIndex = "3";
 			this.sortByTitle.style.zIndex = "4";
@@ -183,13 +171,12 @@ class ManagerPage {
 			for(const media of arrayMedia) {
 				for(const title of titles) {
 					if(media.id == title.id) {
-						title.video = media.video;
 						title.image = media.image;	
+						title.video = media.video;
 					}
 				}
 			}
 			arrayMedia = titles;
-			console.log("titles : " + arrayMedia)
 			setTimeout(() => this.displayMedia(), 100);
 		})
 	}
@@ -198,7 +185,6 @@ class ManagerPage {
 		setTimeout(() => this.clickOnHearth(), 100);
 		return this.containerMedia.innerHTML =
 			arrayMedia.map(media => {
-				console.log(media);
 				if(media.image) {
 					const newMedia = new MediaFactory(this.photographer.name, "image", media.date, media.id, media.likes, media.price, media.tags, media.image, media.alt);
 					return newMedia.displayNewMedia();
@@ -207,76 +193,75 @@ class ManagerPage {
 					const newMedia = new MediaFactory(this.photographer.name, "vidéo", media.date, media.id, media.likes, media.price, media.tags, media.video, media.alt);
 					return newMedia.displayNewMedia();
 				}
-				console.log(arrayMedia);
-			});
+			}).join("");
 	}
 	searchMediaForLightBox() {
-		// travailler plutot avec mediaFactory ici ??? probleme avec les videos a afficher dans lightbox,
-		// balise video à generer
 		for(const media of arrayMedia) {
+			let type;
+			let visibility;
 			if(media.image) {
 				document.getElementById(media.id).addEventListener("click", () => {
-					// Ces id ont été créés dans makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<img id=this.id...)	
-					this.displayModalLightBox(this.photographer.name, media.image, media.tags, arrayMedia.indexOf(media));
+					// Ces id viennent de makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<img id=this.id...)	
+					this.displayModalLightBox(this.photographer.name, media.image, media.tags, arrayMedia.indexOf(media), type="image");
 				})
 			}
 			if(media.video) {
 				document.getElementById(media.id).addEventListener("click", () => {
-					// Ces id ont été créés dans makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<img id=this.id...)	
-					this.displayModalLightBox(this.photographer.name, media.video, media.tags, arrayMedia.indexOf(media));
-					console.log(media.video);
+					// Ces id viennent de makeMiniatureIfVideoIfNotReturnImage() de MediaFactory (<video id=this.id...)	
+					this.displayModalLightBox(this.photographer.name, media.video, media.tags, arrayMedia.indexOf(media), type="video");
 				})
 			}	
 		}
 	}
-	displayModalLightBox(name, image, tags, index) {
-		// ET SI VIDEOS ???
-		// ajouter controls pour les avoir seulement dans la lightbox
-		console.log("lightbox image : " + image);
-		console.log("lightbox tags : " + tags);
+	displayModalLightBox(name, image, tags, index, type) {
 		const titleCleaner = new TitleCleaner(image, tags);
 		titleCleaner.titleToUpperCase();
-		console.log(titleCleaner.returnCleanedTitle());
 		let length = arrayMedia.length - 1;
 		let newIndex = index;
-		let ariaVisibility = true;
 		this.body.ariaHidden = "false";
 		this.modalLightBox.ariaHidden = "true";
 		this.modalLightBox.style.display = "flex";
-		this.modalLightBoxContainerImg.innerHTML = 
-			'<div style="position: relative; display: flex; margin: auto; height: 100%;">' +
-				'<img src="../images/photos/' + name + '/' + image + '" />' +
-				'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + titleCleaner.returnCleanedTitle() + '</p>' + 
-			'</div>'; 
+		let visibility = false;
+		let displayImgOrVideo = () => {
+			if(arrayMedia[newIndex].image) {
+				const titleCleaner = new TitleCleaner(arrayMedia[newIndex].image, arrayMedia[newIndex].tags);
+			titleCleaner.titleToUpperCase();
+			visibility = true;
+			this.modalLightBoxContainerImg.innerHTML = 
+				'<div style="position: relative; display: flex; margin: auto; height: 100%; aria-hidden="' + visibility + '">' +
+					'<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />' +
+					'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + titleCleaner.returnCleanedTitle() + '</p>' + 
+				'</div>';
+			} else {
+				visibility = false;
+			}
+			if(arrayMedia[newIndex].video) {
+				const titleCleaner = new TitleCleaner(arrayMedia[newIndex].video, arrayMedia[newIndex].tags);
+			titleCleaner.titleToUpperCase();
+			visibility = true;
+			this.modalLightBoxContainerImg.innerHTML = 
+				'<div style="position: relative; display: flex; margin: auto; height: 100%; aria-hidden="' + visibility + '">' +
+					'<video src="../images/photos/' + name + '/' + arrayMedia[newIndex].video + '" controls></video>' +
+					'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + titleCleaner.returnCleanedTitle() + '</p>' + 
+				'</div>';
+			} else {
+				visibility = false;
+			}
+		}
+		displayImgOrVideo();
 		let goPhotoLeft = () => {
 			newIndex--;
 			if(newIndex === - 1) {
 				newIndex = length;
 			}
-			const titleCleaner = new TitleCleaner(arrayMedia[newIndex].image, arrayMedia[newIndex].tags);
-			titleCleaner.titleToUpperCase();
-			arrayMedia.map(media => {
-				this.modalLightBoxContainerImg.innerHTML = 
-					'<div style="position: relative; display: flex; margin: auto; height: 100%;">' +
-						'<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />' +
-						'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + titleCleaner.returnCleanedTitle() + '</p>' + 
-					'</div>';
-			})
+			displayImgOrVideo();	
 		}
 		let goPhotoRight = () => {
 			newIndex++;
 			if(newIndex === length + 1) {
 				newIndex = 0;
 			}
-			const titleCleaner = new TitleCleaner(arrayMedia[newIndex].image, arrayMedia[newIndex].tags);
-			titleCleaner.titleToUpperCase();
-			arrayMedia.map(media => {
-				this.modalLightBoxContainerImg.innerHTML = 
-					'<div style="position: relative; display: flex; margin: auto; height: 100%;">' +
-						'<img src="../images/photos/' + name + '/' + arrayMedia[newIndex].image + '" />' +
-						'<p style="position: absolute; margin: 0; bottom: 1%; left: 0;">' + titleCleaner.returnCleanedTitle() + '</p>' + 
-					'</div>';
-			})
+			displayImgOrVideo();
 		}
 		// clic fleche gauche lightbox
 		this.modalLightBoxLeft.addEventListener("click", () => {
@@ -389,7 +374,6 @@ class ManagerPage {
 const managerPage = new ManagerPage();
 managerPage.getIdThenPhotographer();
 managerPage.askJsonForPhotosAndVideos();
-setTimeout(() => managerPage.createNewJSON(), 100);
 managerPage.displayPhotographer();
 managerPage.listeningSortBy();
 managerPage.displayPrice();

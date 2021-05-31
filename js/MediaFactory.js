@@ -16,16 +16,8 @@ class MediaFactory {
 	cleanTitles() {
 		const titleCleaner = new TitleCleaner(this.media, this.tags);
 		titleCleaner.titleToUpperCase();
-		//this.addAlt();
 		return titleCleaner.returnCleanedTitle();
 	}
-	// addAlt() {
-	// 	for(const alt of alts) {
-	// 		if(this.id == alt.id) {
-	// 			return alt.alt;
-	// 		}
-	// 	}	
-	// }
 	makeMiniatureIfVideoIfNotReturnImage() {
 		if(this.type == "vidéo") {
 			return '<video id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" type="video/mp4" alt=' + this.alt + '>' + this.media + '</video>';

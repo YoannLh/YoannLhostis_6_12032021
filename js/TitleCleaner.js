@@ -8,6 +8,7 @@ class TitleCleaner {
 		this.regex3;
 		this.regex4;
 	}
+	// appellée dans ManagerPage (l.138) avant de trier les titres par ordre alphaB
 	titleToUpperCase() {
 		let allLetters = this.dirtyTitle.split("");
 		this.dirtyTitle = this.dirtyTitle.replace(/[a-z]?[A-Z]?/, allLetters[0].toUpperCase());
@@ -34,17 +35,17 @@ class TitleCleaner {
 		this.getNumbers();
 	}
 	getNumbers() {
-		this.regex4 = new RegExp(/[0-9]/);
-		//this.regex4 = new RegExp(/ /);
+		this.regex4 = new RegExp(/587740985637/);
 	}
+	//appelée dans MediaFactory.js (l.19)
 	returnCleanedTitle() {
-		//appelée dans MediaFactory.js (l.54)
 		let noTag = this.dirtyTitle.split(this.regex1);
 		let noJPG = noTag[1].split(this.regex2);
 		let noMP4 = noJPG[0].split(this.regex3);
+		console.log(noMP4);
 		let noNumbers = noMP4[0].split(this.regex4);
 		console.log(noNumbers);
-		let noUnderscore = noMP4[0].replace(/_/gi, " ");
+		let noUnderscore = noNumbers[0].replace(/_/gi, " ");
 		console.log(noUnderscore);
 		let noComma = noUnderscore.replace(/-/gi, " ");
 		console.log(noComma);
@@ -52,9 +53,7 @@ class TitleCleaner {
 		console.log(addSpacesBetweenWords);
 		let noSpaces = addSpacesBetweenWords.replace(/ /, "");
 		console.log(noSpaces);
-		let splitted = noSpaces.split("");
-		console.log(splitted);
-		let finalTitle = noSpaces.replace(/[a-z]?/, splitted[0].toUpperCase());
+		let finalTitle = noSpaces;
 		console.log(finalTitle);
 		return finalTitle;
 	}

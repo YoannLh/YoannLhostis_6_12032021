@@ -97,7 +97,7 @@ header {
 	justify-content: space-between;
 	@media screen and (min-width: 1024px) {
 		top: 0;
-		width: 80%;
+		width: 75%;
 		flex-direction: row;
 		flex-wrap: wrap;
 		margin: auto;
@@ -525,7 +525,7 @@ header {
 		margin: auto;
 		width: 85%;
 		height: 100%;
-		img {
+		img, video {
 			width: 85%;
 			margin: auto;
 			@media screen and (min-width: 1024px) {

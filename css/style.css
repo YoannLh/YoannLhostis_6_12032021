@@ -108,7 +108,7 @@ header .nav .nav__ul__li-toggle {
 @media screen and (min-width: 1024px) {
   #main {
     top: 0;
-    width: 80%;
+    width: 75%;
     flex-direction: row;
     flex-wrap: wrap;
     margin: auto;
@@ -574,12 +574,12 @@ header .nav .nav__ul__li-toggle {
   width: 85%;
   height: 100%;
 }
-#modalLightBox #modalLightBox-containerImg img {
+#modalLightBox #modalLightBox-containerImg img, #modalLightBox #modalLightBox-containerImg video {
   width: 85%;
   margin: auto;
 }
 @media screen and (min-width: 1024px) {
-  #modalLightBox #modalLightBox-containerImg img {
+  #modalLightBox #modalLightBox-containerImg img, #modalLightBox #modalLightBox-containerImg video {
     height: 90%;
     width: auto;
   }
