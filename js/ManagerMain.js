@@ -78,6 +78,11 @@ class ManagerMain {
 		})
 		return this.main.innerHTML = 
 			filteredArrayTaggedArtists.map(artist => {
+				function displayTags() {
+					return artist.tags.map(tag => {
+						return '<li class="main__photographer__container__tags">#' + tag + '</li>';
+					}).join('');
+				}
 				return (
 					'<a href="./pages/photographer.html?id=' + artist.id + '">' +
 						'<section class="main__photographer">' + 
@@ -89,7 +94,7 @@ class ManagerMain {
 								'<div class="main__photographer__description__city"><p>' + artist.city + ", " + artist.country + '</p></div>' +
 								'<div class="main__photographer__description__tagline"><p>' + artist.tagline + '</p></div>' +
 								'<div class="main__photographer__description__price"><p>' + artist.price + "€/jour" + '</p></div>' +
-								'<div class="main__photographer__description__tags">' + artist.tags + '</div>' + 
+								'<div class="main__photographer__container flex">' + displayTags() + '</div>' + 
 							'</div>' + 
 						'</section>' + 
 					'</a>'

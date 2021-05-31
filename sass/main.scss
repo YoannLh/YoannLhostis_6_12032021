@@ -133,7 +133,7 @@ header {
 				color: black;
 			}
 			.main__photographer__description__price {
-				color: grey;
+				color: rgba(0, 0, 0, 0.6);
 			}
 			.main__photographer__container {
 				justify-content: center;
@@ -243,6 +243,7 @@ header {
 		display: flex;
 		max-width: 1400px;
 		margin: 1% auto;
+		padding: 0 80px;
 		align-items: center;	
 	}
 	#sortBy {
@@ -250,7 +251,7 @@ header {
 		left: 10%;
 		width: 12%;
 		height: 40px;
-		margin-left: 1%;
+		margin-left: 4%;
 		padding-top: auto;
 		align-items: center;
 		border: 1px solid black;

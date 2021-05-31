@@ -144,7 +144,7 @@ header .nav .nav__ul__li-toggle {
   color: black;
 }
 #main .main__photographer .main__photographer__description .main__photographer__description__price {
-  color: grey;
+  color: rgba(0, 0, 0, 0.6);
 }
 #main .main__photographer .main__photographer__description .main__photographer__container {
   justify-content: center;
@@ -269,6 +269,7 @@ header .nav .nav__ul__li-toggle {
     display: flex;
     max-width: 1400px;
     margin: 1% auto;
+    padding: 0 80px;
     align-items: center;
   }
 }
@@ -277,7 +278,7 @@ header .nav .nav__ul__li-toggle {
   left: 10%;
   width: 12%;
   height: 40px;
-  margin-left: 1%;
+  margin-left: 4%;
   padding-top: auto;
   align-items: center;
   border: 1px solid black;
