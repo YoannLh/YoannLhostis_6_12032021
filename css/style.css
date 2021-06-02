@@ -25,6 +25,12 @@ h1, h2 {
   margin: 5px;
 }
 
+button {
+  border: 0 solid black;
+  font-size: 1em;
+  background: rgba(255, 255, 255, 0);
+}
+
 #bodyFilter {
   position: absolute;
   display: none;
@@ -89,6 +95,8 @@ header .nav .nav__ul__li, header .nav .nav__ul__li-toggle {
   border: 1px solid #d4d4d4;
   border-radius: 25px;
   list-style-type: none;
+}
+header .nav .nav__ul__li a, header .nav .nav__ul__li-toggle a {
   color: #901c1c;
 }
 header .nav .nav__ul__li-toggle {
@@ -96,6 +104,9 @@ header .nav .nav__ul__li-toggle {
   border: 0px solid #d4d4d4;
   color: white;
   background: #901c1c;
+}
+header .nav .nav__ul__li-toggle a {
+  color: white;
 }
 
 #main {
@@ -288,27 +299,27 @@ header .nav .nav__ul__li-toggle {
   border-radius: 4px;
   z-index: 1;
 }
-#containerSortBy #sortBy:hover {
+#containerSortBy #sortBy:focus {
   border: 0 solid black;
   border-radius: 4px 4px 0 0;
   background: #901c1c;
 }
-#containerSortBy #sortBy:hover #sortByPopularity {
+#containerSortBy #sortBy:focus #sortByPopularity {
   background: #901c1c;
   color: white;
 }
-#containerSortBy #sortBy:hover #sortByDate {
+#containerSortBy #sortBy:focus #sortByDate {
   transform: translateY(100%);
   background: #901c1c;
   color: white;
 }
-#containerSortBy #sortBy:hover #sortByTitle {
+#containerSortBy #sortBy:focus #sortByTitle {
   transform: translateY(200%);
   background: #901c1c;
   border-radius: 0 0 4px 4px;
   color: white;
 }
-#containerSortBy #sortBy:hover .fa-chevron-up {
+#containerSortBy #sortBy:focus .fa-chevron-up {
   transform: rotate(180deg);
 }
 #containerSortBy #sortBy #sortByPopularity {
@@ -406,17 +417,23 @@ header .nav .nav__ul__li-toggle {
   }
 }
 #container-media .infoPhotos {
-  padding: 10px 0;
+  padding: 5px 0;
   justify-content: space-between;
   color: #901c1c;
 }
 #container-media .infoPhotos .priceAndLikes {
   width: 27%;
   justify-content: space-between;
+  color: #901c1c;
+}
+#container-media .infoPhotos .priceAndLikes button {
+  margin-top: -1.5%;
+  color: #901c1c;
+  font-size: 1em;
 }
 #container-media .infoPhotos .priceAndLikes .fa-heart {
   color: #901c1c;
-  padding-left: 5px;
+  padding-left: 3px;
 }
 
 #button, #modal form button {
@@ -439,7 +456,7 @@ header .nav .nav__ul__li-toggle {
     margin: 0;
     top: 155px;
     left: 42%;
-    height: 27px;
+    height: 40px;
     width: auto;
     padding: 7px;
     font-weight: normal;

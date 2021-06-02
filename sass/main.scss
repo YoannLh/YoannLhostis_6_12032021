@@ -19,6 +19,11 @@ h1, h2 {
   font-weight: normal;
   margin: 5px;
 }
+button {
+	border: 0 solid black;
+	font-size: 1em;
+	background: rgba(255,255,255,0);
+}
 $primary: rgba(144,28,28,1);
 $secondary: rgba(211,87,60,1);
 
@@ -78,7 +83,9 @@ header {
 			border: 1px solid rgb(212,212,212);
 			border-radius: 25px;
 			list-style-type: none;
-			color: $primary;
+			a {
+				color: $primary;
+			}
 		}
 		.nav__ul__li-toggle {
 			@extend .nav__ul__li;
@@ -86,6 +93,9 @@ header {
 			border: 0px solid rgb(212,212,212);
 			color: white;
 			background: $primary;
+			a {
+				color: white;
+			}
 		}
 	}
 }
@@ -260,7 +270,7 @@ header {
 		border: 1px solid black;
 		border-radius: 4px;
 		z-index: 1;
-		&:hover {
+		&:focus {
 			border: 0 solid black;
 			border-radius: 4px 4px 0 0;
 			background: $primary;
@@ -372,7 +382,7 @@ header {
 		}
 	}
 	.infoPhotos {
-		padding: 10px 0;
+		padding: 5px 0;
 		justify-content: space-between;
 		color: $primary;
 		@media screen and (min-width: 1024px) {
@@ -381,9 +391,15 @@ header {
 		.priceAndLikes {
 			width: 27%;
 			justify-content: space-between;
+			color: $primary;
+			button {
+				margin-top: -1.5%;
+				color: $primary;
+				font-size: 1em;
+			}
 			.fa-heart {
 				color: $primary;
-				padding-left: 5px;
+				padding-left: 3px;
 			}
 		}
 	}
@@ -406,7 +422,7 @@ header {
 		margin: 0;
 		top: 155px;	
 		left: 42%;
-		height: 27px;
+		height: 40px;
 		width: auto;
 		padding: 7px;
 		font-weight: normal;

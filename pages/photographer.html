@@ -18,31 +18,32 @@
 		<main id="mainInPage"></main>
 		<div id="containerSortBy">
 				<p>Trier par</p>
-				<div id="sortBy" class="flex">
-					<div id="sortByPopularity" class="flex"  role="navigation" aria-expanded="false">
+				<!-- Y'avait des Div partout à la place des buttons -->
+				<button id="sortBy" class="flex" tabindex="0">
+					<div id="sortByPopularity" class="flex" tabindex="-1">
 						<p>Popularité</p>
 					</div>
-					<div id="sortByDate" class="flex">
+					<div id="sortByDate" class="flex" tabindex="-1">
 						<div class="barre1"></div>
 						<p>Date</p>
 						<div class="barre2"></div>
 					</div>
-					<div id="sortByTitle" class="flex">
+					<div id="sortByTitle" class="flex" tabindex="-1">
 						<p>Titre</p>
 					</div>
 					<i class="fas fa-chevron-up"></i>
-				</div>
+				</button>
 		</div>
 		<div id="container-media" class="flex">
 			<div id="likes"></div>
 		</div>
-		<div id="button" class="flex">Contactez-moi</div>
+		<button id="button" class="flex">Contactez-moi</button>
 		<div id="modal" class="flex" aria-describedby="modalTitle">
 			<div id="headerModal" class="flex">
 				<h2 id="modalTitle">Contactez-moi</h2>
-				<div id="closeModal">
+				<button id="closeModal">
 					<i class="fas fa-times" aria-labelledby="closeModal"></i>
-				</div>
+				</button>
 			</div>
 			<p id="headerModal__photographer"></p>
 			<form id="formModal" action="./photographer.html" method="post">
@@ -58,9 +59,9 @@
 			</form>
 		</div>
 		<div id="modalLightBox" role="dialog">
-			<div id="closeModalLightBox">
+			<button id="closeModalLightBox">
 				<i class="fas fa-times"></i>
-			</div>
+			</button>
 			<div id="modalLightBoxLeft">
 				<i class="fas fa-chevron-left"></i>
 			</div>

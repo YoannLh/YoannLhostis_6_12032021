@@ -20,10 +20,10 @@ class MediaFactory {
 	}
 	makeMiniatureIfVideoIfNotReturnImage() {
 		if(this.type == "vidéo") {
-			return '<video id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" type="video/mp4" alt=' + this.alt + '>' + this.media + '</video>';
+			return '<a href="#" id="' + this.id + '"><video id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" type="video/mp4" alt=' + this.alt + '>' + this.media + '</video></a>';
 		}
 		if(this.type == "image") {
-			return '<img id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" alt=' + this.alt + ' />';
+			return '<a href="#" id="' + this.id + '"><img id="' + this.id + '" src="../images/photos/' + this.name + '/' + this.media + '" alt=' + this.alt + ' /></a>';
 		}
 	}
 	displayNewMedia() {
@@ -34,7 +34,7 @@ class MediaFactory {
 					'<div>' + this.cleanTitles() + '</div>' + 
 					'<div class="priceAndLikes flex">' +
 						'<div>' + this.price + '€</div>' + 
-						'<div id="containerHearth' + this.id + '">' + this.likes + '<i class="fas fa-heart" id="hearth' + this.id + '"></i></div>' + 
+						'<button id="containerHearth' + this.id + '">' + this.likes + '<i class="fas fa-heart" id="hearth' + this.id + '"></i></button>' + 
 					'</div>' +
 				'</div>' +
 			'</div>'
